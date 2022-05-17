@@ -1,0 +1,10 @@
+
+include: package:lints/recommended.yaml
+
+linter:
+  rules:
+    require_trailing_commas: true
+    eol_at_end_of_file: true
+    always_use_package_imports: true
+    prefer_expression_function_bodies: true
+    unnecessary_await_in_return: true

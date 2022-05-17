@@ -1,0 +1,7 @@
+
+targets:
+  $default:
+    builders:
+      isar_generator:
+        options:
+          flutter: false
