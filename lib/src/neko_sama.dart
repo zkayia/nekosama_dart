@@ -22,14 +22,14 @@ class NekoSama {
 	/// An optional `HttpClient` to use to make requests.
 	final HttpClient httpClient;
 	/// The search database handler.
-	late NSSearchDB searchDB;
+	late NSSearchDb searchDb;
 
 	/// The main api for the `nekosama_dart` library.
 	NekoSama({
 		this.source=NSSources.vostfr,
 		HttpClient? httpClient,
 	}) : httpClient = httpClient ?? HttpClient() {
-		searchDB = NSSearchDB(this);
+		searchDb = NSSearchDb(this);
 	}
 
 	/// Gets the home page.

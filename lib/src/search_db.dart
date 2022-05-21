@@ -19,7 +19,7 @@ import 'package:nekosama_dart/src/querys/ns_num_query.dart';
 import 'package:nekosama_dart/src/querys/ns_string_query.dart';
 
 
-class NSSearchDB {
+class NSSearchDb {
 
 	final _boxes = {
 		null: [
@@ -46,7 +46,7 @@ class NSSearchDB {
 	/// Return `true` if the database was disposed.
 	bool get dbDisposed => !_dbActive;
 
-	NSSearchDB(NekoSama parent) : _parent = parent;
+	NSSearchDb(NekoSama parent) : _parent = parent;
 
 	/// Initialises the search database.
 	/// 
@@ -95,12 +95,12 @@ class NSSearchDB {
 	/// Equivalent to [populate].
 	Stream<NSProgress> populateStream() async* {
 		await clear();
-		final rawSearchDB = await Uri.https(
+		final rawSearchDb = await Uri.https(
 			"neko-sama.fr",
 			"/animes-search-${_parent.source.name}.json",
 		).get(httpClient: _parent.httpClient);
-		final searchDB = jsonDecode(rawSearchDB.body) as List;
-		final total = searchDB.length;
+		final searchDb = jsonDecode(rawSearchDb.body) as List;
+		final total = searchDb.length;
 		final animesBox = Hive.box<String>("ns_animes");
 		final titlesBox = Hive.box<String>("ns_titles");
 		final statusesBox = Hive.box<List<int>>("ns_statuses");
@@ -113,7 +113,7 @@ class NSSearchDB {
 		Map<int, Set<int>> epCounts = {};
 		yield NSProgress(total: total, progress: 0);
 		for (var i = 0; i < total; i++) {
-			final anime = parseAnime(searchDB.elementAt(i));
+			final anime = parseAnime(searchDb.elementAt(i));
 			animesBox.put(anime.id, anime.toJson());
 			titlesBox.put(
 				anime.id,
