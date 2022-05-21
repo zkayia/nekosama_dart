@@ -44,6 +44,10 @@ class NSSearchDb {
 	bool _dbActive = false;
 	/// Miscellaneous database statistics.
 	NSSearchDbStats? stats;
+	/// The `DateTime` at which the database was last populated.
+	/// 
+	/// Returns null if the database was never populated.
+	DateTime? get lastPopulated => Hive.box("ns_search_info").get("lastPopulated");
 	/// Return `true` if the database was initialised.
 	bool get dbInitialised => _dbActive;
 	/// Return `true` if the database was disposed.
