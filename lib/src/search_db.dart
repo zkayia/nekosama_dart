@@ -22,16 +22,22 @@ import 'package:nekosama_dart/src/querys/ns_string_query.dart';
 class NSSearchDB {
 
 	final _boxes = {
-		"ns_search_info": null,
-		"ns_animes": (Future<void> Function<T>() f) async => f.call<String>(),
-		"ns_titles": (Future<void> Function<T>() f) async => f.call<String>(),
-		"ns_genres": (Future<void> Function<T>() f) async => f.call<List<int>>(),
-		"ns_statuses": (Future<void> Function<T>() f) async => f.call<List<int>>(),
-		"ns_types": (Future<void> Function<T>() f) async => f.call<List<int>>(),
-		"ns_years": (Future<void> Function<T>() f) async => f.call<List<int>>(),
-		"ns_popularity": (Future<void> Function<T>() f) async => f.call<List<int>>(),
-		"ns_score": (Future<void> Function<T>() f) async => f.call<List<int>>(),
-		"ns_episodeCount": (Future<void> Function<T>() f) async => f.call<List<int>>(),
+		null: [
+			"ns_search_info",
+		],
+		(Future<void> Function<T>() f) async => f.call<String>(): [
+			"ns_animes",
+			"ns_titles"
+		],
+		(Future<void> Function<T>() f) async => f.call<List<int>>(): [
+			"ns_genres",
+			"ns_statuses",
+			"ns_types",
+			"ns_years",
+			"ns_popularity",
+			"ns_score",
+			"ns_episodeCount",
+		],
 	};
 	final NekoSama _parent;
 	bool _dbActive = false;
@@ -53,11 +59,15 @@ class NSSearchDB {
 				Hive.init(dbDir);
 			}
 			for (final box in _boxes.entries) {
-				if (box.value == null) {
-					await Hive.openBox(box.key);
+				if (box.key == null) {
+					for (final name in box.value) {
+						await Hive.openBox(name);
+					}
 					continue;
 				}
-				await box.value?.call(<B>() async => Hive.openBox<B>(box.key));
+				for (final name in box.value) {
+					await box.key?.call(<B>() async => Hive.openBox<B>(name));
+				}
 			}
 			_dbActive = true;
 		} catch (e) {
@@ -166,11 +176,15 @@ class NSSearchDB {
 	/// Clears the search database.
 	Future<void> clearDb() async {
 		for (final box in _boxes.entries) {
-			if (box.value == null) {
-				await Hive.box(box.key).clear();
+			if (box.key == null) {
+				for (final name in box.value) {
+					await Hive.box(name).clear();
+				}
 				continue;
 			}
-			await box.value?.call(<B>() async => Hive.box<B>(box.key).clear());
+			for (final name in box.value) {
+				await box.key?.call(<B>() async => Hive.box<B>(name).clear());
+			}
 		}
 	}
 
