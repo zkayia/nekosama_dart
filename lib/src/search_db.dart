@@ -94,7 +94,7 @@ class NSSearchDB {
 	/// 
 	/// Equivalent to [populate].
 	Stream<NSProgress> populateStream() async* {
-		await clearDb();
+		await clear();
 		final rawSearchDB = await Uri.https(
 			"neko-sama.fr",
 			"/animes-search-${_parent.source.name}.json",
@@ -174,7 +174,7 @@ class NSSearchDB {
 	}
 
 	/// Clears the search database.
-	Future<void> clearDb() async {
+	Future<void> clear() async {
 		for (final box in _boxes.entries) {
 			if (box.key == null) {
 				for (final name in box.value) {
