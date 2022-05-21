@@ -12,6 +12,7 @@ import 'package:nekosama_dart/src/helpers/parse_anime.dart';
 import 'package:nekosama_dart/src/models/neko_sama_exception.dart';
 import 'package:nekosama_dart/src/models/ns_anime.dart';
 import 'package:nekosama_dart/src/models/ns_progress.dart';
+import 'package:nekosama_dart/src/models/ns_search_db_stats.dart';
 import 'package:nekosama_dart/src/neko_sama.dart';
 import 'package:nekosama_dart/src/querys/ns_double_query.dart';
 import 'package:nekosama_dart/src/querys/ns_int_query.dart';
@@ -41,6 +42,8 @@ class NSSearchDb {
 	};
 	final NekoSama _parent;
 	bool _dbActive = false;
+	/// Miscellaneous database statistics.
+	NSSearchDbStats? stats;
 	/// Return `true` if the database was initialised.
 	bool get dbInitialised => _dbActive;
 	/// Return `true` if the database was disposed.
@@ -168,6 +171,36 @@ class NSSearchDb {
 				final infoBox = Hive.box("ns_search_info");
 				infoBox.put("singleAnimeMaxGenres", singleAnimeMaxGenres);
 				infoBox.put("lastPopulated", DateTime.now());
+				final totalStatuses = statusesBox.toMap().map(
+					(key, value) => MapEntry(enumFromDb(NSStatuses.values, key), value.length),
+				);
+				final totalTypes = typesBox.toMap().map(
+					(key, value) => MapEntry(enumFromDb(NSTypes.values, key), value.length),
+				);
+				stats = NSSearchDbStats(
+					totalAnimes: total,
+					totalPerGenre: {
+						for (final genre in genres.entries)
+							enumFromDb(NSGenres.values, genre.key): genre.value.length
+					},
+					totalPerStatus: {
+						...totalStatuses,
+						for (final status in NSStatuses.values)
+							if (!totalStatuses.containsKey(status))
+								status: status == NSStatuses.aired
+									? total - totalStatuses.values.reduce((value, element) => value + element)
+									: 0,
+					},
+					totalPerType: {
+						...totalTypes,
+						for (final status in NSTypes.values)
+							if (!totalTypes.containsKey(status))
+								status: status == NSTypes.tv
+									? total - totalTypes.values.reduce((value, element) => value + element)
+									: 0,
+					},
+					totalPerYear: years.map((key, value) => MapEntry(key, value.length)),
+				);
 			}
 			yield NSProgress(total: total, progress: i+1);
 		}
