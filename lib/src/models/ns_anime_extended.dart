@@ -14,7 +14,6 @@ abstract class NSAnimeExtended extends NSAnimeBase {
 	final NSSources source;
 	final NSStatuses status;
 	final NSTypes type;
-	final double popularity;
 	final double score;
 
 	NSAnimeExtended({
@@ -28,7 +27,6 @@ abstract class NSAnimeExtended extends NSAnimeBase {
 		required this.source,
 		required this.status,
 		required this.type,
-		required this.popularity,
 		required this.score,
 	});
 }

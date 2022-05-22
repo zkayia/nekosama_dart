@@ -26,7 +26,6 @@ class NSAnime extends NSAnimeExtended {
 		required super.source,
 		required super.status,
 		required super.type,
-		required super.popularity,
 		required super.score,
 		required this.description,
 		required this.episodes,
@@ -45,7 +44,6 @@ class NSAnime extends NSAnimeExtended {
 		NSSources? source,
 		NSStatuses? status,
 		NSTypes? type,
-		double? popularity,
 		double? score,
 		String? description,
 		List<NSEpisode>? episodes,
@@ -62,7 +60,6 @@ class NSAnime extends NSAnimeExtended {
 		source: source ?? this.source,
 		status: status ?? this.status,
 		type: type ?? this.type,
-		popularity: popularity ?? this.popularity,
 		score: score ?? this.score,
 		description: description ?? this.description,
 		episodes: episodes ?? this.episodes,
@@ -81,7 +78,6 @@ class NSAnime extends NSAnimeExtended {
 		"source": enumToDb(source),
 		"status": enumToDb(status),
 		"type": enumToDb(type),
-		"popularity": popularity,
 		"score": score,
 		"description": description,
 		"episodes": episodes.map((x) => x.toMap()).toList(),
@@ -100,7 +96,6 @@ class NSAnime extends NSAnimeExtended {
 		source: enumFromDb(NSSources.values, map["source"]),
 		status: enumFromDb(NSStatuses.values, map["status"]),
 		type: enumFromDb(NSTypes.values, map["type"]),
-		popularity: map["popularity"] ?? 0.0,
 		score: map["score"] ?? 0.0,
 		description: map["description"],
 		episodes: List<NSEpisode>.from(map["episodes"]?.map((x) => NSEpisode.fromMap(x))),
@@ -114,7 +109,7 @@ class NSAnime extends NSAnimeExtended {
 
 	@override
 	String toString() =>
-		"NSAnime(id: $id, title: $title, url: $url, thumbnail: $thumbnail, episodeCount: $episodeCount, titles: $titles, genres: $genres, source: $source, status: $status, type: $type, popularity: $popularity, score: $score, description: $description, episodes: $episodes, startDate: $startDate, endDate: $endDate)";
+		"NSAnime(id: $id, title: $title, url: $url, thumbnail: $thumbnail, episodeCount: $episodeCount, titles: $titles, genres: $genres, source: $source, status: $status, type: $type, score: $score, description: $description, episodes: $episodes, startDate: $startDate, endDate: $endDate)";
 
 	@override
 	bool operator ==(Object other) {
@@ -131,7 +126,6 @@ class NSAnime extends NSAnimeExtended {
 			&& other.source == source
 			&& other.status == status
 			&& other.type == type
-			&& other.popularity == popularity
 			&& other.score == score
 			&& other.description == description
 			&& listEquals(other.episodes, episodes)
@@ -150,7 +144,6 @@ class NSAnime extends NSAnimeExtended {
 		^ source.hashCode
 		^ status.hashCode
 		^ type.hashCode
-		^ popularity.hashCode
 		^ score.hashCode
 		^ description.hashCode
 		^ episodes.hashCode
