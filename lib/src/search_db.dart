@@ -46,7 +46,7 @@ class NSSearchDb {
 	NSSearchDbStats? stats;
 	/// The `DateTime` at which the database was last populated.
 	/// 
-	/// Returns null if the database was never populated.
+	/// Returns `null` if the database was never populated.
 	DateTime? get lastPopulated => Hive.box("ns_search_info").get("lastPopulated");
 	/// Return `true` if the database was initialised.
 	bool get dbInitialised => _dbActive;
@@ -227,7 +227,7 @@ class NSSearchDb {
 
 	/// Get the anime with the provided [id].
 	/// 
-	/// Returns null if [id] doesn't exists.
+	/// Returns `null` if [id] doesn't exists.
 	Future<NSAnime?> getAnime(int id) async {
 		try {
 			final anime = Hive.box<String>("ns_animes").get(id);
