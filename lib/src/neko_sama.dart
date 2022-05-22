@@ -9,7 +9,7 @@ import 'package:nekosama_dart/src/helpers/extract_new_episodes.dart';
 import 'package:nekosama_dart/src/extensions/uri_get.dart';
 import 'package:nekosama_dart/src/helpers/parse_carousel.dart';
 import 'package:nekosama_dart/src/models/neko_sama_exception.dart';
-import 'package:nekosama_dart/src/models/ns_anime.dart';
+import 'package:nekosama_dart/src/models/ns_search_anime.dart';
 import 'package:nekosama_dart/src/models/ns_episode.dart';
 import 'package:nekosama_dart/src/models/ns_home.dart';
 import 'package:nekosama_dart/src/search_db.dart';
@@ -53,7 +53,7 @@ class NekoSama {
 	/// 
 	/// If [anime] has 0 episodes, calls [getEpisodes], then
 	/// returns `null` if no episodes were found.
-	Future<List<String>?> guessEpisodeUrls(NSAnime anime) async {
+	Future<List<Uri>?> guessEpisodeUrls(NSSearchAnime anime) async {
 		String zeroPadInt(int number) => "${number < 10 ? "0": ""}$number";
 		if (anime.episodeCount == 0) {
 			final eps = await getEpisodes(anime);
@@ -63,23 +63,24 @@ class NekoSama {
 		}
 		return [
 			for (var i = 1; i < anime.episodeCount+1; i++)
-				anime.url
-					.replaceFirst("/info/", "/episode/")
-					.replaceFirst(
-						RegExp("-${source.apiName}\$"),
-						"-${zeroPadInt(i)}-${source.apiName}",
-					),
+				Uri.parse(
+					anime.url
+						.toString()
+						.replaceFirst("/info/", "/episode/")
+						.replaceFirst(
+							RegExp("-${source.apiName}\$"),
+							"-${zeroPadInt(i)}-${source.apiName}",
+						),
+				),
 		];
 	}
 
 	/// Gets the [NSEpisode] list of [anime].
 	/// 
 	/// Returns `null` if no episodes were found.
-	Future<List<NSEpisode>?> getEpisodes(NSAnime anime) async {
+	Future<List<NSEpisode>?> getEpisodes(NSSearchAnime anime) async {
 		try {
-			final animePageResponse = await Uri.parse(anime.url).get(
-				httpClient: httpClient,
-			);
+			final animePageResponse = await anime.url.get(httpClient: httpClient);
 			final rawEps = RegExp(r"(?<=var\sepisodes\s=\s)\[.+\](?=;)")
 				.firstMatch(animePageResponse.body)?.group(0);
 			if (rawEps == null) {
@@ -91,7 +92,7 @@ class NekoSama {
 						animeId: anime.id,
 						episodeNumber: extractEpisodeInt(episode["episode"]),
 						thumbnail: episode["url_image"],
-						url: "https://neko-sama.fr${episode["url"]}",
+						url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
 					),
 			];
 		} catch (e) {
@@ -106,7 +107,7 @@ class NekoSama {
 		try {
 			return RegExp(r"=\s'(https://www.pstream.net/e/.+)'")
 				.firstMatch(
-					(await Uri.parse(episode.url).get(httpClient: httpClient)).body,
+					(await episode.url.get(httpClient: httpClient)).body,
 				)?.group(1);
 		} catch (e) {
 			throw NekoSamaException("Failed to get the video link, $e");
