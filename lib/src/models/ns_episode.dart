@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 
 
 class NSEpisode {
@@ -25,6 +27,24 @@ class NSEpisode {
 		thumbnail: thumbnail ?? this.thumbnail,
 		url: url ?? this.url,
 	);
+
+	Map<String, dynamic> toMap() => {
+		"animeId": animeId,
+		"episodeNumber": episodeNumber,
+		"thumbnail": thumbnail,
+		"url": url,
+	};
+
+	factory NSEpisode.fromMap(Map<String, dynamic> map) => NSEpisode(
+		animeId: int.parse(map["animeId"] ?? "0"),
+		episodeNumber: int.parse(map["episodeNumber"] ?? "0"),
+		thumbnail: map["thumbnail"] ?? "",
+		url: map["url"] ?? "",
+	);
+
+	String toJson() => json.encode(toMap());
+
+	factory NSEpisode.fromJson(String source) => NSEpisode.fromMap(json.decode(source));
 
 	@override
 	String toString() =>

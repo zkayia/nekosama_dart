@@ -1,42 +1,39 @@
 
+import 'package:nekosama_dart/src/models/ns_anime_base.dart';
 
-class NSCarouselAnime {
 
-	final int id;
-	final String title;
+class NSCarouselAnime extends NSAnimeBase {
+
 	final int year;
-	final String url;
-	final String thumbnail;
-	final int episodeCount;
 	
 	NSCarouselAnime({
-		required this.id,
-		required this.title,
+		required super.id,
+		required super.title,
+		required super.url,
+		required super.thumbnail,
+		required super.episodeCount,
 		required this.year,
-		required this.url,
-		required this.thumbnail,
-		required this.episodeCount,
 	});
 
 	NSCarouselAnime copyWith({
 		int? id,
 		String? title,
-		int? year,
 		String? url,
 		String? thumbnail,
 		int? episodeCount,
+		int? year,
 	}) => NSCarouselAnime(
 		id: id ?? this.id,
 		title: title ?? this.title,
-		year: year ?? this.year,
 		url: url ?? this.url,
 		thumbnail: thumbnail ?? this.thumbnail,
 		episodeCount: episodeCount ?? this.episodeCount,
+		year: year ?? this.year,
 	);
 
 	@override
 	String toString() =>
-		"NSCarouselAnime(id: $id, title: $title, year: $year, url: $url, thumbnail: $thumbnail, episodeCount: $episodeCount)";
+		"NSCarouselAnime(id: $id, title: $title, url: $url, thumbnail: $thumbnail, episodeCount: $episodeCount, year: $year)";
 
 	@override
 	bool operator ==(Object other) {
@@ -44,17 +41,17 @@ class NSCarouselAnime {
 		return other is NSCarouselAnime
 			&& other.id == id
 			&& other.title == title
-			&& other.year == year
 			&& other.url == url
 			&& other.thumbnail == thumbnail
-			&& other.episodeCount == episodeCount;
+			&& other.episodeCount == episodeCount
+			&& other.year == year;
 	}
 
 	@override
 	int get hashCode => id.hashCode
 		^ title.hashCode
-		^ year.hashCode
 		^ url.hashCode
 		^ thumbnail.hashCode
-		^ episodeCount.hashCode;
+		^ episodeCount.hashCode
+		^ year.hashCode;
 }

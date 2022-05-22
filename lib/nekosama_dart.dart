@@ -24,6 +24,8 @@ export 'package:nekosama_dart/src/models/ns_dated_episode.dart' show
 	NSDatedEpisode;
 export 'package:nekosama_dart/src/models/ns_progress.dart' show
 	NSProgress;
+export 'package:nekosama_dart/src/models/ns_search_anime.dart' show
+	NSSearchAnime;
 export 'package:nekosama_dart/src/models/ns_titles.dart' show
 	NSTitles;
 

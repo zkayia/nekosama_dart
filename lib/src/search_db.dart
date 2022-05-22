@@ -8,9 +8,9 @@ import 'package:nekosama_dart/src/enums/ns_statuses.dart';
 import 'package:nekosama_dart/src/enums/ns_types.dart';
 import 'package:nekosama_dart/src/extensions/uri_get.dart';
 import 'package:nekosama_dart/src/helpers/add_id_to_box.dart';
-import 'package:nekosama_dart/src/helpers/parse_anime.dart';
+import 'package:nekosama_dart/src/helpers/parse_search_anime.dart';
 import 'package:nekosama_dart/src/models/neko_sama_exception.dart';
-import 'package:nekosama_dart/src/models/ns_anime.dart';
+import 'package:nekosama_dart/src/models/ns_search_anime.dart';
 import 'package:nekosama_dart/src/models/ns_progress.dart';
 import 'package:nekosama_dart/src/models/ns_search_db_stats.dart';
 import 'package:nekosama_dart/src/neko_sama.dart';
@@ -120,7 +120,10 @@ class NSSearchDb {
 		Map<int, Set<int>> epCounts = {};
 		yield NSProgress(total: total, progress: 0);
 		for (var i = 0; i < total; i++) {
-			final anime = parseAnime(searchDb.elementAt(i));
+			final anime = parseSearchAnime({
+				...searchDb.elementAt(i),
+				"source": _parent.source,
+			});
 			animesBox.put(anime.id, anime.toJson());
 			titlesBox.put(
 				anime.id,
@@ -228,10 +231,10 @@ class NSSearchDb {
 	/// Get the anime with the provided [id].
 	/// 
 	/// Returns `null` if [id] doesn't exists.
-	Future<NSAnime?> getAnime(int id) async {
+	Future<NSSearchAnime?> getSearchAnime(int id) async {
 		try {
 			final anime = Hive.box<String>("ns_animes").get(id);
-			return anime == null ? null : NSAnime.fromJson(anime);
+			return anime == null ? null : NSSearchAnime.fromJson(anime);
 		} catch (e) {
 			throw NekoSamaException(
 				"Something went wrong while looking for an anime with id $id, $e",
@@ -243,7 +246,7 @@ class NSSearchDb {
 	bool existsAnime(int id) => Hive.box<String>("ns_animes").containsKey(id);
 
 	/// Make a search with the provided filters.
-	Future<List<NSAnime>> searchAnimes({
+	Future<List<NSSearchAnime>> searchAnimes({
 		NSStringQuery? title,
 		Iterable<NSGenres>? genresHasAll,
 		Iterable<NSStatuses>? statusesIsAny,
@@ -265,16 +268,16 @@ class NSSearchDb {
 		);
 		return [
 			for (final id in results)
-				await getAnime(id),
+				await getSearchAnime(id),
 		]
-			.whereType<NSAnime>()
+			.whereType<NSSearchAnime>()
 			.toList();
 	}
 	
 	/// Make a search with the provided filters.
 	/// 
 	/// Returns a list of ids, use [searchAnimes]
-	/// to directly get the corresponding [NSAnime].
+	/// to directly get the corresponding [NSSearchAnime].
 	Future<List<int>> searchIds({
 		NSStringQuery? title,
 		Iterable<NSGenres>? genresHasAll,
