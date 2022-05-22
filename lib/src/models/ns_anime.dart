@@ -10,7 +10,7 @@ import 'package:nekosama_dart/src/models/ns_anime_extended.dart';
 
 class NSAnime extends NSAnimeExtended {
 
-	final String? description;
+	final String? synopsis;
 	final List<NSEpisode> episodes;
 	final DateTime? startDate;
 	final DateTime? endDate;
@@ -27,7 +27,7 @@ class NSAnime extends NSAnimeExtended {
 		required super.status,
 		required super.type,
 		required super.score,
-		required this.description,
+		required this.synopsis,
 		required this.episodes,
 		required this.startDate,
 		required this.endDate,
@@ -45,7 +45,7 @@ class NSAnime extends NSAnimeExtended {
 		NSStatuses? status,
 		NSTypes? type,
 		double? score,
-		String? description,
+		String? synopsis,
 		List<NSEpisode>? episodes,
 		DateTime? startDate,
 		DateTime? endDate,
@@ -61,7 +61,7 @@ class NSAnime extends NSAnimeExtended {
 		status: status ?? this.status,
 		type: type ?? this.type,
 		score: score ?? this.score,
-		description: description ?? this.description,
+		synopsis: synopsis ?? this.synopsis,
 		episodes: episodes ?? this.episodes,
 		startDate: startDate ?? this.startDate,
 		endDate: endDate ?? this.endDate,
@@ -79,7 +79,7 @@ class NSAnime extends NSAnimeExtended {
 		"status": enumToDb(status),
 		"type": enumToDb(type),
 		"score": score,
-		"description": description,
+		"synopsis": synopsis,
 		"episodes": episodes.map((x) => x.toMap()).toList(),
 		"startDate": startDate?.millisecondsSinceEpoch,
 		"endDate": endDate?.millisecondsSinceEpoch,
@@ -97,7 +97,7 @@ class NSAnime extends NSAnimeExtended {
 		status: enumFromDb(NSStatuses.values, map["status"]),
 		type: enumFromDb(NSTypes.values, map["type"]),
 		score: map["score"] ?? 0.0,
-		description: map["description"],
+		synopsis: map["synopsis"],
 		episodes: List<NSEpisode>.from(map["episodes"]?.map((x) => NSEpisode.fromMap(x))),
 		startDate: map["startDate"] != null ? DateTime.fromMillisecondsSinceEpoch(map["startDate"]) : null,
 		endDate: map["endDate"] != null ? DateTime.fromMillisecondsSinceEpoch(map["endDate"]) : null,
@@ -109,7 +109,7 @@ class NSAnime extends NSAnimeExtended {
 
 	@override
 	String toString() =>
-		"NSAnime(id: $id, title: $title, url: $url, thumbnail: $thumbnail, episodeCount: $episodeCount, titles: $titles, genres: $genres, source: $source, status: $status, type: $type, score: $score, description: $description, episodes: $episodes, startDate: $startDate, endDate: $endDate)";
+		"NSAnime(id: $id, title: $title, url: $url, thumbnail: $thumbnail, episodeCount: $episodeCount, titles: $titles, genres: $genres, source: $source, status: $status, type: $type, score: $score, synopsis: $synopsis, episodes: $episodes, startDate: $startDate, endDate: $endDate)";
 
 	@override
 	bool operator ==(Object other) {
@@ -127,7 +127,7 @@ class NSAnime extends NSAnimeExtended {
 			&& other.status == status
 			&& other.type == type
 			&& other.score == score
-			&& other.description == description
+			&& other.synopsis == synopsis
 			&& listEquals(other.episodes, episodes)
 			&& other.startDate == startDate
 			&& other.endDate == endDate;
@@ -145,7 +145,7 @@ class NSAnime extends NSAnimeExtended {
 		^ status.hashCode
 		^ type.hashCode
 		^ score.hashCode
-		^ description.hashCode
+		^ synopsis.hashCode
 		^ episodes.hashCode
 		^ startDate.hashCode
 		^ endDate.hashCode;
