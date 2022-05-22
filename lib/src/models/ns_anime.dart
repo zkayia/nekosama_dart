@@ -3,9 +3,14 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 
-import 'package:nekosama_dart/nekosama_dart.dart';
 import 'package:nekosama_dart/src/enums/enums_db_adaptors.dart';
+import 'package:nekosama_dart/src/enums/ns_genres.dart';
+import 'package:nekosama_dart/src/enums/ns_sources.dart';
+import 'package:nekosama_dart/src/enums/ns_statuses.dart';
+import 'package:nekosama_dart/src/enums/ns_types.dart';
 import 'package:nekosama_dart/src/models/ns_anime_extended.dart';
+import 'package:nekosama_dart/src/models/ns_episode.dart';
+import 'package:nekosama_dart/src/models/ns_titles.dart';
 
 
 class NSAnime extends NSAnimeExtended {
