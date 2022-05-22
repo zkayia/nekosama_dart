@@ -20,8 +20,8 @@ NSCarouselAnime parseCarouselElement(Element carouselElement) {
 			id: extractAnimeIdFromLink(path),
 			title: carouselElement.getElementsByClassName("title").first.text,
 			year: int.parse(matches?.group(1) ?? ""),
-			url: "https://neko-sama.fr$path",
-			thumbnail: carouselElement.getElementsByClassName("lazy").first.attributes["data-src"] ?? "",
+			url: Uri.parse("https://neko-sama.fr$path"),
+			thumbnail: Uri.parse(carouselElement.getElementsByClassName("lazy").first.attributes["data-src"] ?? ""),
 			episodeCount: int.parse(matches?.group(2) ?? ""),
 		);
 	} catch (e) {

@@ -41,8 +41,8 @@ class NSSearchAnime extends NSAnimeExtended {
 		NSTypes? type,
 		double? popularity,
 		double? score,
-		String? url,
-		String? thumbnail,
+		Uri? url,
+		Uri? thumbnail,
 		int? episodeCount,
 		int? year,
 	}) => NSSearchAnime(
@@ -72,8 +72,8 @@ class NSSearchAnime extends NSAnimeExtended {
 		"year": year,
 		"popularity": popularity,
 		"score": score,
-		"url": url,
-		"thumbnail": thumbnail,
+		"url": url.toString(),
+		"thumbnail": thumbnail.toString(),
 		"episodeCount": episodeCount,
 	};
 
@@ -88,8 +88,8 @@ class NSSearchAnime extends NSAnimeExtended {
 		year: map["year"] ?? 0,
 		popularity: map["popularity"] ?? 0.0,
 		score: map["score"] ?? 0.0,
-		url: map["url"] ?? "",
-		thumbnail: map["thumbnail"] ?? "",
+		url: Uri.tryParse(map["url"] ?? "") ?? Uri(),
+		thumbnail: Uri.tryParse(map["thumbnail"] ?? "") ?? Uri(),
 		episodeCount: map["episodeCount"] ?? 0,
 	);
 

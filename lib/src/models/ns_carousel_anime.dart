@@ -18,8 +18,8 @@ class NSCarouselAnime extends NSAnimeBase {
 	NSCarouselAnime copyWith({
 		int? id,
 		String? title,
-		String? url,
-		String? thumbnail,
+		Uri? url,
+		Uri? thumbnail,
 		int? episodeCount,
 		int? year,
 	}) => NSCarouselAnime(

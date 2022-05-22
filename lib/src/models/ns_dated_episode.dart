@@ -18,8 +18,8 @@ class NSDatedEpisode extends NSEpisode {
 		DateTime? addedAt,
 		int? animeId,
 		int? episodeNumber,
-		String? thumbnail,
-		String? url,
+		Uri? thumbnail,
+		Uri? url,
 	}) => NSDatedEpisode(
 		addedAt: addedAt ?? this.addedAt,
 		animeId: animeId ?? this.animeId,

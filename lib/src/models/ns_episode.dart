@@ -6,8 +6,8 @@ class NSEpisode {
 
 	final int animeId;
 	final int episodeNumber;
-	final String thumbnail;
-	final String url;
+	final Uri thumbnail;
+	final Uri url;
 	
 	NSEpisode({
 		required this.animeId,
@@ -19,8 +19,8 @@ class NSEpisode {
 	NSEpisode copyWith({
 		int? animeId,
 		int? episodeNumber,
-		String? thumbnail,
-		String? url,
+		Uri? thumbnail,
+		Uri? url,
 	}) => NSEpisode(
 		animeId: animeId ?? this.animeId,
 		episodeNumber: episodeNumber ?? this.episodeNumber,
@@ -31,15 +31,15 @@ class NSEpisode {
 	Map<String, dynamic> toMap() => {
 		"animeId": animeId,
 		"episodeNumber": episodeNumber,
-		"thumbnail": thumbnail,
-		"url": url,
+		"thumbnail": thumbnail.toString(),
+		"url": url.toString(),
 	};
 
 	factory NSEpisode.fromMap(Map<String, dynamic> map) => NSEpisode(
 		animeId: int.parse(map["animeId"] ?? "0"),
 		episodeNumber: int.parse(map["episodeNumber"] ?? "0"),
-		thumbnail: map["thumbnail"] ?? "",
-		url: map["url"] ?? "",
+		thumbnail: Uri.tryParse(map["thumbnail"] ?? "") ?? Uri(),
+		url: Uri.tryParse(map["url"] ?? "") ?? Uri(),
 	);
 
 	String toJson() => json.encode(toMap());

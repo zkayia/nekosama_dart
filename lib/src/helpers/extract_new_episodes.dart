@@ -21,7 +21,7 @@ List<NSDatedEpisode> extractNewEpisodes(GetUrlResponse homePageResponse) {
 					animeId: extractAnimeIdFromLink(episode["anime_url"]!),
 					episodeNumber: extractEpisodeInt(episode["episode"] ?? "0"),
 					thumbnail: episode["url_bg"] ?? "",
-					url: "https://neko-sama.fr${episode["url"] ?? ""}",
+					url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
 				),
 	];
 }

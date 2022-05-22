@@ -28,7 +28,7 @@ NSSearchAnime parseSearchAnime(Map<String, dynamic> nsMap) => NSSearchAnime(
 	year: int.tryParse(nsMap["start_date_year"] ?? "0") ?? 0,
 	popularity: nsMap["popularity"] ?? 0.0,
 	score: double.tryParse(nsMap["score"] ?? "0.0") ?? 0.0,
-	url: "https://neko-sama.fr${nsMap["url"] ?? ""}",
+	url: Uri.parse("https://neko-sama.fr${nsMap["url"] ?? ""}"),
 	thumbnail: nsMap["url_image"] ?? "",
 	episodeCount: extractEpisodeInt(nsMap["nb_eps"] ?? "0"),
 );

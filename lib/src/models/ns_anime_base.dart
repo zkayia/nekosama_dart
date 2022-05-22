@@ -4,8 +4,8 @@ abstract class NSAnimeBase {
 
 	final int id;
 	final String title;
-	final String url;
-	final String thumbnail;
+	final Uri url;
+	final Uri thumbnail;
 	final int episodeCount;
 
 	NSAnimeBase({

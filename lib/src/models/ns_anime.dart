@@ -37,8 +37,8 @@ class NSAnime extends NSAnimeExtended {
 	NSAnime copyWith({
 		int? id,
 		String? title,
-		String? url,
-		String? thumbnail,
+		Uri? url,
+		Uri? thumbnail,
 		int? episodeCount,
 		NSTitles? titles,
 		List<NSGenres>? genres,
@@ -73,8 +73,8 @@ class NSAnime extends NSAnimeExtended {
 	Map<String, dynamic> toMap() => {
 		"id": id,
 		"title": title,
-		"url": url,
-		"thumbnail": thumbnail,
+		"url": url.toString(),
+		"thumbnail": thumbnail.toString(),
 		"episodeCount": episodeCount,
 		"titles": titles.toMap(),
 		"genres": genres.map((x) => enumToDb(x)).toList(),
@@ -92,8 +92,8 @@ class NSAnime extends NSAnimeExtended {
 	factory NSAnime.fromMap(Map<String, dynamic> map) => NSAnime(
 		id: map["id"] ?? 0,
 		title: map["title"] ?? "",
-		url: map["url"] ?? "",
-		thumbnail: map["thumbnail"] ?? "",
+		url: Uri.tryParse(map["url"] ?? "") ?? Uri(),
+		thumbnail: Uri.tryParse(map["thumbnail"] ?? "") ?? Uri(),
 		episodeCount: map["episodeCount"] ?? 0,
 		titles: NSTitles.fromMap(map["titles"]),
 		genres: List<NSGenres>.from(map["genres"]?.map((x) => enumFromDb(NSGenres.values, x))),
