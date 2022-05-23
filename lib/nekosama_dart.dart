@@ -21,7 +21,7 @@ export 'package:nekosama_dart/src/models/ns_episode.dart' show
 export 'package:nekosama_dart/src/models/ns_home.dart' show
 	NSHome;
 export 'package:nekosama_dart/src/models/ns_dated_episode.dart' show
-	NSDatedEpisode;
+	NSNewEpisode;
 export 'package:nekosama_dart/src/models/ns_progress.dart' show
 	NSProgress;
 export 'package:nekosama_dart/src/models/ns_search_anime.dart' show

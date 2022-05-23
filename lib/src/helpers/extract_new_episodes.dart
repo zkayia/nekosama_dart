@@ -7,21 +7,22 @@ import 'package:nekosama_dart/src/models/get_url_response.dart';
 import 'package:nekosama_dart/src/models/ns_dated_episode.dart';
 
 
-List<NSDatedEpisode> extractNewEpisodes(GetUrlResponse homePageResponse) {
+List<NSNewEpisode> extractNewEpisodes(GetUrlResponse homePageResponse) {
 	final reg = RegExp(r"(?<=var\slastEpisodes\s=\s)\[.+\](?=;)");
 	final rawLastEps = reg.firstMatch(homePageResponse.body)?.group(0);
 	return [
 		if (rawLastEps != null)
 			for (final Map<String, dynamic> episode in jsonDecode(rawLastEps))
-				NSDatedEpisode(
-					addedAt: _parseNewEpisodeTime(
-						homePageResponse.timestamp,
-						episode["time"] ?? "",
-					),
+				NSNewEpisode(
 					animeId: extractAnimeIdFromLink(episode["anime_url"]!),
 					episodeNumber: extractEpisodeInt(episode["episode"] ?? "0"),
 					thumbnail: Uri.tryParse(episode["url_bg"] ?? "") ?? Uri(),
 					url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
+					addedAt: _parseNewEpisodeTime(
+						homePageResponse.timestamp,
+						episode["time"] ?? "",
+					),
+					episodeTitle: episode["title"] ?? "",
 				),
 	];
 }

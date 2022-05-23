@@ -6,7 +6,7 @@ import 'package:nekosama_dart/src/models/ns_dated_episode.dart';
 
 class NSHome {
 
-	final List<NSDatedEpisode> newEpisodes;
+	final List<NSNewEpisode> newEpisodes;
 	final List<NSCarouselAnime> seasonalAnimes;
 	final List<NSCarouselAnime> mostPopularAnimes;
 	
@@ -17,7 +17,7 @@ class NSHome {
 	});
 
 	NSHome copyWith({
-		List<NSDatedEpisode>? newEpisodes,
+		List<NSNewEpisode>? newEpisodes,
 		List<NSCarouselAnime>? seasonalAnimes,
 		List<NSCarouselAnime>? mostPopularAnimes,
 	}) => NSHome(
