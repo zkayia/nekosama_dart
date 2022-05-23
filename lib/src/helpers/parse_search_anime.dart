@@ -22,13 +22,13 @@ NSSearchAnime parseSearchAnime(Map<String, dynamic> nsMap) => NSSearchAnime(
 	genres: (nsMap["genres"] as List?)?.mapType<NSGenres>(
 		(e) => NSGenres.fromString(e),
 	) ?? [],
-	source: NSSources.fromString(nsMap["source"] ?? "") ?? NSSources.vostfr,
+	source: nsMap["source"] ?? NSSources.vostfr,
 	status: NSStatuses.fromString(nsMap["status"] ?? "") ?? NSStatuses.aired,
 	type: NSTypes.fromString(nsMap["type"] ?? "") ?? NSTypes.tv,
 	year: int.tryParse(nsMap["start_date_year"] ?? "0") ?? 0,
 	popularity: nsMap["popularity"] ?? 0.0,
 	score: double.tryParse(nsMap["score"] ?? "0.0") ?? 0.0,
 	url: Uri.parse("https://neko-sama.fr${nsMap["url"] ?? ""}"),
-	thumbnail: nsMap["url_image"] ?? "",
+	thumbnail: Uri.tryParse(nsMap["url_image"] ?? "") ?? Uri(),
 	episodeCount: extractEpisodeInt(nsMap["nb_eps"] ?? "0"),
 );
