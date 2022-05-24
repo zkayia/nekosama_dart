@@ -180,12 +180,13 @@ class NekoSama {
 	/// Gets the url of the video player embed of [episode].
 	/// 
 	/// Currently only supports episode videos hosted on `pstream.net`.
-	Future<String?> getVideoUrl(NSEpisode episode) async {
+	Future<Uri?> getVideoUrl(NSEpisode episode) async {
 		try {
-			return RegExp(r"=\s'(https://www.pstream.net/e/.+)'")
-				.firstMatch(
-					(await episode.url.get(httpClient: httpClient)).body,
-				)?.group(1);
+			return Uri.tryParse(
+				RegExp(r"=\s'(https://www.pstream.net/e/.+)'")
+					.firstMatch((await episode.url.get(httpClient: httpClient)).body,
+				)?.group(1) ?? "",
+			);
 		} catch (e) {
 			throw NekoSamaException("Failed to get the video link, $e");
 		}
