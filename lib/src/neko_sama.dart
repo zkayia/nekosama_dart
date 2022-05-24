@@ -83,13 +83,13 @@ class NekoSama {
 			final dates = infos?.last.text.split("-");
 			return NSAnime(
 				id: id,
-				title: title.text,
+				title: title.firstChild?.text?.replaceAll("VOSTFR", "").trim() ?? "",
 				url: url,
 				thumbnail: Uri.tryParse(document.querySelector(".cover > img")?.attributes["src"] ?? "") ?? Uri(),
 				episodeCount: extractEpisodeInt(infos?.elementAt(3).text ?? "?"),
 				titles: NSTitles(
 					animeId: id,
-					others: title.firstChild?.text,
+					others: title.nodes.last.text,
 				),
 				genres: document.getElementsByClassName("tag list").first.children.mapType<NSGenres>(
 					(e) => NSGenres.fromString(e.attributes["href"] ?? ""),
