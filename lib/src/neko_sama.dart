@@ -74,6 +74,7 @@ class NekoSama {
 					for (final Map<String, dynamic> episode in jsonDecode(rawEps))
 						NSEpisode(
 							animeId: id,
+							animeUrl: url,
 							episodeNumber: extractEpisodeInt(episode["episode"]),
 							thumbnail: Uri.tryParse(episode["url_image"] ?? "") ?? Uri(),
 							url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
@@ -167,6 +168,7 @@ class NekoSama {
 				for (final Map<String, dynamic> episode in jsonDecode(rawEps))
 					NSEpisode(
 						animeId: anime.id,
+						animeUrl: anime.url,
 						episodeNumber: extractEpisodeInt(episode["episode"]),
 						thumbnail: episode["url_image"],
 						url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),

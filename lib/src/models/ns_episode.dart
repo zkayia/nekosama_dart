@@ -5,12 +5,14 @@ import 'dart:convert';
 class NSEpisode {
 
 	final int animeId;
+	final Uri animeUrl;
 	final int episodeNumber;
 	final Uri thumbnail;
 	final Uri url;
 	
 	NSEpisode({
 		required this.animeId,
+		required this.animeUrl,
 		required this.episodeNumber,
 		required this.thumbnail,
 		required this.url,
@@ -18,11 +20,13 @@ class NSEpisode {
 
 	NSEpisode copyWith({
 		int? animeId,
+		Uri? animeUrl,
 		int? episodeNumber,
 		Uri? thumbnail,
 		Uri? url,
 	}) => NSEpisode(
 		animeId: animeId ?? this.animeId,
+		animeUrl: animeUrl ?? this.animeUrl,
 		episodeNumber: episodeNumber ?? this.episodeNumber,
 		thumbnail: thumbnail ?? this.thumbnail,
 		url: url ?? this.url,
@@ -30,6 +34,7 @@ class NSEpisode {
 
 	Map<String, dynamic> toMap() => {
 		"animeId": animeId,
+		"animeUrl": animeUrl,
 		"episodeNumber": episodeNumber,
 		"thumbnail": thumbnail.toString(),
 		"url": url.toString(),
@@ -37,6 +42,7 @@ class NSEpisode {
 
 	factory NSEpisode.fromMap(Map<String, dynamic> map) => NSEpisode(
 		animeId: int.parse(map["animeId"] ?? "0"),
+		animeUrl: Uri.tryParse(map["animeId"] ?? "") ?? Uri(),
 		episodeNumber: int.parse(map["episodeNumber"] ?? "0"),
 		thumbnail: Uri.tryParse(map["thumbnail"] ?? "") ?? Uri(),
 		url: Uri.tryParse(map["url"] ?? "") ?? Uri(),
@@ -48,13 +54,14 @@ class NSEpisode {
 
 	@override
 	String toString() =>
-		"NSEpisode(animeId: $animeId, episodeNumber: $episodeNumber, thumbnail: $thumbnail, url: $url)";
+		"NSEpisode(animeId: $animeId, animeUrl: $animeUrl, episodeNumber: $episodeNumber, thumbnail: $thumbnail, url: $url)";
 
 	@override
 	bool operator ==(Object other) {
 		if (identical(this, other)) return true;
 		return other is NSEpisode
 			&& other.animeId == animeId
+			&& other.animeUrl == animeUrl
 			&& other.episodeNumber == episodeNumber
 			&& other.thumbnail == thumbnail
 			&& other.url == url;
@@ -62,6 +69,7 @@ class NSEpisode {
 
 	@override
 	int get hashCode => animeId.hashCode
+		^ animeUrl.hashCode
 		^ episodeNumber.hashCode
 		^ thumbnail.hashCode
 		^ url.hashCode;

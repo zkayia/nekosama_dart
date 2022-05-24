@@ -8,6 +8,7 @@ class NSNewEpisode extends NSEpisode {
 	
 	NSNewEpisode({
 		required super.animeId,
+		required super.animeUrl,
 		required super.episodeNumber,
 		required super.thumbnail,
 		required super.url,
@@ -18,6 +19,7 @@ class NSNewEpisode extends NSEpisode {
 	@override
 	NSNewEpisode copyWith({
 		int? animeId,
+		Uri? animeUrl,
 		int? episodeNumber,
 		Uri? thumbnail,
 		Uri? url,
@@ -25,6 +27,7 @@ class NSNewEpisode extends NSEpisode {
 		String? episodeTitle,
 	}) => NSNewEpisode(
 		animeId: animeId ?? this.animeId,
+		animeUrl: animeUrl ?? this.animeUrl,
 		episodeNumber: episodeNumber ?? this.episodeNumber,
 		thumbnail: thumbnail ?? this.thumbnail,
 		url: url ?? this.url,
@@ -33,13 +36,14 @@ class NSNewEpisode extends NSEpisode {
 	);
 
 	@override
-	String toString() => "NSDatedEpisode(animeId: $animeId, episodeNumber: $episodeNumber, thumbnail: $thumbnail, url: $url, addedAt: $addedAt, episodeTitle: $episodeTitle)";
+	String toString() => "NSDatedEpisode(animeId: $animeId, animeUrl: $animeUrl, episodeNumber: $episodeNumber, thumbnail: $thumbnail, url: $url, addedAt: $addedAt, episodeTitle: $episodeTitle)";
 
 	@override
 	bool operator ==(Object other) {
 		if (identical(this, other)) return true;
 		return other is NSNewEpisode
 			&& other.animeId == animeId
+			&& other.animeUrl == animeUrl
 			&& other.episodeNumber == episodeNumber
 			&& other.thumbnail == thumbnail
 			&& other.url == url
@@ -49,6 +53,7 @@ class NSNewEpisode extends NSEpisode {
 
 	@override
 	int get hashCode => animeId.hashCode
+		^ animeUrl.hashCode
 		^ episodeNumber.hashCode
 		^ thumbnail.hashCode
 		^ url.hashCode

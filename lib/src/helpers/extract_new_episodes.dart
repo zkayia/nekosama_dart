@@ -15,6 +15,7 @@ List<NSNewEpisode> extractNewEpisodes(GetUrlResponse homePageResponse) {
 			for (final Map<String, dynamic> episode in jsonDecode(rawLastEps))
 				NSNewEpisode(
 					animeId: extractAnimeIdFromLink(episode["anime_url"]!),
+					animeUrl: Uri.parse("https://neko-sama.fr${episode["anime_url"]}"),
 					episodeNumber: extractEpisodeInt(episode["episode"] ?? "0"),
 					thumbnail: Uri.tryParse(episode["url_bg"] ?? "") ?? Uri(),
 					url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
