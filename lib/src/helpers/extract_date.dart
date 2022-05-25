@@ -15,6 +15,7 @@ DateTime? extractDate(String date) {
 					: DateTime(int.parse(match), i+1);
 			}
 		}
+		return null;
 	} catch (e) {
 		throw NekoSamaException("Failed to extract date from String '$date', $e");
 	}
