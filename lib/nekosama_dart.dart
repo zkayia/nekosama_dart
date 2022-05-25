@@ -38,3 +38,5 @@ export 'package:nekosama_dart/src/querys/ns_string_query.dart' show
 
 export 'package:nekosama_dart/src/neko_sama.dart' show
 	NekoSama;
+export 'package:nekosama_dart/src/search_db.dart' show
+	NSSearchDb;
