@@ -81,7 +81,9 @@ class NekoSama {
 					others: title.nodes.last.text,
 				),
 				genres: document.getElementsByClassName("tag list").first.children.mapType<NSGenres>(
-					(e) => NSGenres.fromString(e.attributes["href"] ?? ""),
+					(e) => NSGenres.fromString(
+						RegExp(r"\[\W+([\w\s\-]+)\W").firstMatch(e.attributes["href"] ?? "")?.group(1) ?? "",
+					),
 				),
 				source: source,
 				status: NSStatuses.fromString(
