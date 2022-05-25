@@ -152,7 +152,7 @@ class NekoSama {
 						animeId: animeId,
 						animeUrl: animeUrl,
 						episodeNumber: extractEpisodeInt(episode["episode"]),
-						thumbnail: episode["url_image"],
+						thumbnail: Uri.tryParse(episode["url_image"] ?? "") ?? Uri(),
 						url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
 						duration: parseEpisodeDuration(episode["time"]),
 					),
