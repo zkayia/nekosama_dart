@@ -158,7 +158,7 @@ class NekoSama {
 					),
 			];
 		} catch (e) {
-			throw NekoSamaException("Failed to parse episode data");
+			throw NekoSamaException("Failed to parse episodes for anime at url '$animeUrl', $e");
 		}
 	}
 
