@@ -68,20 +68,7 @@ class NekoSama {
 			final synopsis = synopsisRaw == null || synopsisRaw.toLowerCase().contains("aucun synopsis pour le moment")
 				? null
 				: synopsisRaw;
-			final rawEps = RegExp(r"(?<=var\sepisodes\s=\s)\[.+\](?=;)")
-				.firstMatch(animePageBody)?.group(0);
-			final episodes = [
-				if (rawEps != null)
-					for (final Map<String, dynamic> episode in jsonDecode(rawEps))
-						NSEpisode(
-							animeId: id,
-							animeUrl: url,
-							episodeNumber: extractEpisodeInt(episode["episode"]),
-							thumbnail: Uri.tryParse(episode["url_image"] ?? "") ?? Uri(),
-							url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
-							duration: parseEpisodeDuration(episode["time"]),
-						),
-			];
+			final episodes = (await _getEpisodes(id, url, animePageBody)) ?? [];
 			final dates = infos?.last.text.split("-");
 			return NSAnime(
 				id: id,
@@ -125,7 +112,7 @@ class NekoSama {
 	/// 
 	/// Guessed urls are not guaranteed to be correct.
 	/// 
-	/// If [anime] has 0 episodes, calls [getEpisodes], then
+	/// If [anime] has 0 episodes, tries to fetch episodes and
 	/// returns `null` if no episodes were found.
 	Future<List<Uri>?> guessEpisodeUrls(NSAnimeBase anime) async {
 		if (anime is NSAnime) {
@@ -133,7 +120,7 @@ class NekoSama {
 		}
 		String zeroPadInt(int number) => "${number < 10 ? "0": ""}$number";
 		if (anime.episodeCount == 0) {
-			final eps = await getEpisodes(anime);
+			final eps = await _getEpisodes(anime.id, anime.url);
 			return eps == null
 				? null
 				: [...eps.map((e) => e.url)];
@@ -152,25 +139,18 @@ class NekoSama {
 		];
 	}
 
-	/// Gets the [NSEpisode] list of [anime].
-	/// 
-	/// Returns `null` if no episodes were found.
-	Future<List<NSEpisode>?> getEpisodes(NSAnimeBase anime) async {
+	Future<List<NSEpisode>?> _getEpisodes(int animeId, Uri animeUrl, [String? animePageBody]) async {
 		try {
-			if (anime is NSAnime) {
-				return anime.episodes;
-			}
-			final animePageResponse = await anime.url.get(httpClient: httpClient);
 			final rawEps = RegExp(r"(?<=var\sepisodes\s=\s)\[.+\](?=;)")
-				.firstMatch(animePageResponse.body)?.group(0);
+				.firstMatch(animePageBody ?? (await animeUrl.get(httpClient: httpClient)).body)?.group(0);
 			if (rawEps == null) {
 				return null;
 			}
 			return [
 				for (final Map<String, dynamic> episode in jsonDecode(rawEps))
 					NSEpisode(
-						animeId: anime.id,
-						animeUrl: anime.url,
+						animeId: animeId,
+						animeUrl: animeUrl,
 						episodeNumber: extractEpisodeInt(episode["episode"]),
 						thumbnail: episode["url_image"],
 						url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
