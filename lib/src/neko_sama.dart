@@ -14,6 +14,7 @@ import 'package:nekosama_dart/src/helpers/extract_date.dart';
 import 'package:nekosama_dart/src/helpers/extract_new_episodes.dart';
 import 'package:nekosama_dart/src/extensions/uri_get.dart';
 import 'package:nekosama_dart/src/helpers/parse_carousel.dart';
+import 'package:nekosama_dart/src/helpers/parse_episode_duration.dart';
 import 'package:nekosama_dart/src/models/neko_sama_exception.dart';
 import 'package:nekosama_dart/src/models/ns_anime.dart';
 import 'package:nekosama_dart/src/models/ns_anime_base.dart';
@@ -78,6 +79,7 @@ class NekoSama {
 							episodeNumber: extractEpisodeInt(episode["episode"]),
 							thumbnail: Uri.tryParse(episode["url_image"] ?? "") ?? Uri(),
 							url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
+							duration: parseEpisodeDuration(episode["time"]),
 						),
 			];
 			final dates = infos?.last.text.split("-");
@@ -172,6 +174,7 @@ class NekoSama {
 						episodeNumber: extractEpisodeInt(episode["episode"]),
 						thumbnail: episode["url_image"],
 						url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
+						duration: parseEpisodeDuration(episode["time"]),
 					),
 			];
 		} catch (e) {

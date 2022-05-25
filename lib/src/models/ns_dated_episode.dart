@@ -12,6 +12,7 @@ class NSNewEpisode extends NSEpisode {
 		required super.episodeNumber,
 		required super.thumbnail,
 		required super.url,
+		super.duration,
 		required this.addedAt,
 		required this.episodeTitle,
 	});
@@ -23,6 +24,7 @@ class NSNewEpisode extends NSEpisode {
 		int? episodeNumber,
 		Uri? thumbnail,
 		Uri? url,
+		Duration? duration,
 		DateTime? addedAt,
 		String? episodeTitle,
 	}) => NSNewEpisode(
@@ -31,12 +33,13 @@ class NSNewEpisode extends NSEpisode {
 		episodeNumber: episodeNumber ?? this.episodeNumber,
 		thumbnail: thumbnail ?? this.thumbnail,
 		url: url ?? this.url,
+		duration: duration ?? this.duration,
 		addedAt: addedAt ?? this.addedAt,
 		episodeTitle: episodeTitle ?? this.episodeTitle,
 	);
 
 	@override
-	String toString() => "NSDatedEpisode(animeId: $animeId, animeUrl: $animeUrl, episodeNumber: $episodeNumber, thumbnail: $thumbnail, url: $url, addedAt: $addedAt, episodeTitle: $episodeTitle)";
+	String toString() => "NSDatedEpisode(animeId: $animeId, animeUrl: $animeUrl, episodeNumber: $episodeNumber, thumbnail: $thumbnail, url: $url, duration: $duration, addedAt: $addedAt, episodeTitle: $episodeTitle)";
 
 	@override
 	bool operator ==(Object other) {
@@ -47,6 +50,7 @@ class NSNewEpisode extends NSEpisode {
 			&& other.episodeNumber == episodeNumber
 			&& other.thumbnail == thumbnail
 			&& other.url == url
+			&& other.duration == duration
 			&& other.addedAt == addedAt
 			&& other.episodeTitle == episodeTitle;
 	}
@@ -57,6 +61,7 @@ class NSNewEpisode extends NSEpisode {
 		^ episodeNumber.hashCode
 		^ thumbnail.hashCode
 		^ url.hashCode
+		^ duration.hashCode
 		^ addedAt.hashCode
 		^ episodeTitle.hashCode;
 }
