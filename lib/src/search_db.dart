@@ -129,11 +129,11 @@ class NSSearchDb {
 				anime.id,
 				[
 					anime.title,
-					anime.titles.english,
-					anime.titles.french,
-					anime.titles.romanji,
-					anime.titles.others,
-				].join(" "),
+					anime.titles.english ?? "",
+					anime.titles.french ?? "",
+					anime.titles.romanji ?? "",
+					anime.titles.others ?? "",
+				].map((e) => e.toLowerCase().trim()).join(" "),
 			);
 			if (anime.genres.length > singleAnimeMaxGenres) {
 				singleAnimeMaxGenres = anime.genres.length;

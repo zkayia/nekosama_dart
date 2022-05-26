@@ -10,15 +10,19 @@ class NSStringQuery {
 
 	/// A `String` query that validates text containing [string].
 	/// 
+	/// [string] will go through `String.toLowerCase()` and `String.trim()`.
+	/// 
 	/// Uses `String.contains()`.
 	NSStringQuery.contains(String string) : 
-		operation = ((String other) => other.contains(string));
+		operation = ((String other) => other.contains(string.toLowerCase().trim()));
 
 	/// A `String` query that validates text identical to [string].
 	/// 
+	/// [string] will go through `String.toLowerCase()` and `String.trim()`.
+	/// 
 	/// Uses the `==` operator.
 	NSStringQuery.equals(String string) : 
-		operation = ((String other) => other == string);
+		operation = ((String other) => other == string.toLowerCase().trim());
 
 	/// A `String` query that validates text matching [pattern].
 	/// 
