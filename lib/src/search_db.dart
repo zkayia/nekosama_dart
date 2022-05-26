@@ -291,9 +291,9 @@ class NSSearchDb {
 		final infoBox = Hive.box("ns_search_info");
 		final genres = {...genresHasAll ?? {}};
 		final isAnyEnums = [
-			if (statusesIsAny != null)
+			if (statusesIsAny?.isNotEmpty ?? false)
 				[statusesIsAny, NSStatuses.values, NSStatuses.aired, "ns_statuses"],
-			if (typesIsAny != null)
+			if (typesIsAny?.isNotEmpty ?? false)
 				[typesIsAny, NSTypes.values, NSTypes.tv, "ns_types"],
 		];
 		final numQuerys = [
@@ -346,6 +346,7 @@ class NSSearchDb {
 					return [];
 				}
 			}
+			addToMatches(results);
 		}
 		for (final isAny in isAnyEnums) {
 			final set = {...(isAny.first as Iterable?) ?? {}};
