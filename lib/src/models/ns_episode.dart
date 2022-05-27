@@ -38,7 +38,7 @@ class NSEpisode {
 
 	Map<String, dynamic> toMap() => {
 		"animeId": animeId,
-		"animeUrl": animeUrl,
+		"animeUrl": animeUrl.toString(),
 		"episodeNumber": episodeNumber,
 		"thumbnail": thumbnail.toString(),
 		"url": url.toString(),
