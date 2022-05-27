@@ -46,9 +46,9 @@ class NSEpisode {
 	};
 
 	factory NSEpisode.fromMap(Map<String, dynamic> map) => NSEpisode(
-		animeId: int.parse(map["animeId"] ?? "0"),
+		animeId: map["animeId"] ?? 0,
 		animeUrl: Uri.tryParse(map["animeId"] ?? "") ?? Uri(),
-		episodeNumber: int.parse(map["episodeNumber"] ?? "0"),
+		episodeNumber: map["episodeNumber"] ?? 0,
 		thumbnail: Uri.tryParse(map["thumbnail"] ?? "") ?? Uri(),
 		url: Uri.tryParse(map["url"] ?? "") ?? Uri(),
 		duration: map["duration"] == null ? null : Duration(milliseconds: map["duration"]),

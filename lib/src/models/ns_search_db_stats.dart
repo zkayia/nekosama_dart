@@ -47,7 +47,7 @@ class NSSearchDbStats {
 	};
 
 	factory NSSearchDbStats.fromMap(Map<String, dynamic> map) => NSSearchDbStats(
-		totalAnimes: int.parse(map["totalAnimes"] ?? "0"),
+		totalAnimes: map["totalAnimes"] ?? 0,
 		totalPerGenre: Map<NSGenres, int>.from(map["totalPerGenre"]),
 		totalPerStatus: Map<NSStatuses, int>.from(map["totalPerStatus"]),
 		totalPerType: Map<NSTypes, int>.from(map["totalPerType"]),
