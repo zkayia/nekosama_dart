@@ -12,6 +12,10 @@ export 'package:nekosama_dart/src/enums/ns_statuses.dart' show
 export 'package:nekosama_dart/src/enums/ns_types.dart' show
 	NSTypes;
 
+export 'package:nekosama_dart/src/models/ns_anime_base.dart' show
+	NSAnimeBase;
+export 'package:nekosama_dart/src/models/ns_anime_extended_base.dart' show
+	NSAnimeExtendedBase;
 export 'package:nekosama_dart/src/models/ns_anime.dart' show
 	NSAnime;
 export 'package:nekosama_dart/src/models/ns_carousel_anime.dart' show

@@ -8,12 +8,12 @@ import 'package:nekosama_dart/src/enums/ns_genres.dart';
 import 'package:nekosama_dart/src/enums/ns_sources.dart';
 import 'package:nekosama_dart/src/enums/ns_statuses.dart';
 import 'package:nekosama_dart/src/enums/ns_types.dart';
-import 'package:nekosama_dart/src/models/ns_anime_extended.dart';
+import 'package:nekosama_dart/src/models/ns_anime_extended_base.dart';
 import 'package:nekosama_dart/src/models/ns_episode.dart';
 import 'package:nekosama_dart/src/models/ns_titles.dart';
 
 
-class NSAnime extends NSAnimeExtended {
+class NSAnime extends NSAnimeExtendedBase {
 
 	final String? synopsis;
 	final List<NSEpisode> episodes;

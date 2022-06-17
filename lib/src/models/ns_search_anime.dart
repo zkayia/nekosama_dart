@@ -7,11 +7,11 @@ import 'package:nekosama_dart/src/enums/ns_genres.dart';
 import 'package:nekosama_dart/src/enums/ns_sources.dart';
 import 'package:nekosama_dart/src/enums/ns_statuses.dart';
 import 'package:nekosama_dart/src/enums/ns_types.dart';
-import 'package:nekosama_dart/src/models/ns_anime_extended.dart';
+import 'package:nekosama_dart/src/models/ns_anime_extended_base.dart';
 import 'package:nekosama_dart/src/models/ns_titles.dart';
 
 
-class NSSearchAnime extends NSAnimeExtended {
+class NSSearchAnime extends NSAnimeExtendedBase {
 
 	final int year;
 	final double popularity;
