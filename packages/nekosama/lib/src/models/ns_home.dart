@@ -1,8 +1,8 @@
 
 import 'package:collection/collection.dart';
 
-import 'package:nekosama_dart/src/models/ns_carousel_anime.dart';
-import 'package:nekosama_dart/src/models/ns_dated_episode.dart';
+import 'package:nekosama/src/models/ns_carousel_anime.dart';
+import 'package:nekosama/src/models/ns_dated_episode.dart';
 
 class NSHome {
 

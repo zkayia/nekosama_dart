@@ -1,0 +1,13 @@
+
+name: nekosama_dart
+repository: https://github.com/zkayia/nekosama_dart
+
+packages:
+  - packages/**
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+
+ide:
+  intellij: false

@@ -1,5 +1,5 @@
 
-import 'package:nekosama_dart/src/models/neko_sama_exception.dart';
+import 'package:nekosama/src/models/neko_sama_exception.dart';
 
 
 const _months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];

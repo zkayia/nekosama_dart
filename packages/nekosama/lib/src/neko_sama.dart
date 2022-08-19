@@ -3,30 +3,30 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:html/parser.dart';
-import 'package:nekosama_dart/src/enums/ns_genres.dart';
-import 'package:nekosama_dart/src/enums/ns_sources.dart';
-import 'package:nekosama_dart/src/enums/ns_statuses.dart';
-import 'package:nekosama_dart/src/enums/ns_types.dart';
-import 'package:nekosama_dart/src/extensions/list_map_type.dart';
-import 'package:nekosama_dart/src/helpers/extract_anime_id.dart';
-import 'package:nekosama_dart/src/helpers/extract_episode_int.dart';
-import 'package:nekosama_dart/src/helpers/extract_date.dart';
-import 'package:nekosama_dart/src/helpers/extract_new_episodes.dart';
-import 'package:nekosama_dart/src/extensions/uri_get.dart';
-import 'package:nekosama_dart/src/helpers/parse_carousel.dart';
-import 'package:nekosama_dart/src/helpers/parse_episode_duration.dart';
-import 'package:nekosama_dart/src/models/neko_sama_exception.dart';
-import 'package:nekosama_dart/src/models/ns_anime.dart';
-import 'package:nekosama_dart/src/models/ns_anime_base.dart';
-import 'package:nekosama_dart/src/models/ns_carousel_anime.dart';
-import 'package:nekosama_dart/src/models/ns_search_anime.dart';
-import 'package:nekosama_dart/src/models/ns_episode.dart';
-import 'package:nekosama_dart/src/models/ns_home.dart';
-import 'package:nekosama_dart/src/models/ns_titles.dart';
-import 'package:nekosama_dart/src/search_db.dart';
+import 'package:nekosama/src/enums/ns_genres.dart';
+import 'package:nekosama/src/enums/ns_sources.dart';
+import 'package:nekosama/src/enums/ns_statuses.dart';
+import 'package:nekosama/src/enums/ns_types.dart';
+import 'package:nekosama/src/extensions/list_map_type.dart';
+import 'package:nekosama/src/helpers/extract_anime_id.dart';
+import 'package:nekosama/src/helpers/extract_episode_int.dart';
+import 'package:nekosama/src/helpers/extract_date.dart';
+import 'package:nekosama/src/helpers/extract_new_episodes.dart';
+import 'package:nekosama/src/extensions/uri_get.dart';
+import 'package:nekosama/src/helpers/parse_carousel.dart';
+import 'package:nekosama/src/helpers/parse_episode_duration.dart';
+import 'package:nekosama/src/models/neko_sama_exception.dart';
+import 'package:nekosama/src/models/ns_anime.dart';
+import 'package:nekosama/src/models/ns_anime_base.dart';
+import 'package:nekosama/src/models/ns_carousel_anime.dart';
+import 'package:nekosama/src/models/ns_search_anime.dart';
+import 'package:nekosama/src/models/ns_episode.dart';
+import 'package:nekosama/src/models/ns_home.dart';
+import 'package:nekosama/src/models/ns_titles.dart';
+import 'package:nekosama/src/search_db.dart';
 
 
-/// The main api for the `nekosama_dart` library.
+/// The main api for the `nekosama` library.
 class NekoSama {
 	/// The source type to use when interacting with `neko-sama.fr`.
 	final NSSources source;
@@ -35,7 +35,7 @@ class NekoSama {
 	/// The search database handler.
 	late NSSearchDb searchDb;
 
-	/// The main api for the `nekosama_dart` library.
+	/// The main api for the `nekosama` library.
 	NekoSama({
 		this.source=NSSources.vostfr,
 		HttpClient? httpClient,

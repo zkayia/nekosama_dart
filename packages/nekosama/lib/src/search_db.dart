@@ -2,22 +2,22 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
-import 'package:nekosama_dart/src/enums/enums_db_adaptors.dart';
-import 'package:nekosama_dart/src/enums/ns_genres.dart';
-import 'package:nekosama_dart/src/enums/ns_statuses.dart';
-import 'package:nekosama_dart/src/enums/ns_types.dart';
-import 'package:nekosama_dart/src/extensions/uri_get.dart';
-import 'package:nekosama_dart/src/helpers/add_id_to_box.dart';
-import 'package:nekosama_dart/src/helpers/parse_search_anime.dart';
-import 'package:nekosama_dart/src/models/neko_sama_exception.dart';
-import 'package:nekosama_dart/src/models/ns_search_anime.dart';
-import 'package:nekosama_dart/src/models/ns_progress.dart';
-import 'package:nekosama_dart/src/models/ns_search_db_stats.dart';
-import 'package:nekosama_dart/src/neko_sama.dart';
-import 'package:nekosama_dart/src/querys/ns_double_query.dart';
-import 'package:nekosama_dart/src/querys/ns_int_query.dart';
-import 'package:nekosama_dart/src/querys/ns_num_query.dart';
-import 'package:nekosama_dart/src/querys/ns_string_query.dart';
+import 'package:nekosama/src/enums/enums_db_adaptors.dart';
+import 'package:nekosama/src/enums/ns_genres.dart';
+import 'package:nekosama/src/enums/ns_statuses.dart';
+import 'package:nekosama/src/enums/ns_types.dart';
+import 'package:nekosama/src/extensions/uri_get.dart';
+import 'package:nekosama/src/helpers/add_id_to_box.dart';
+import 'package:nekosama/src/helpers/parse_search_anime.dart';
+import 'package:nekosama/src/models/neko_sama_exception.dart';
+import 'package:nekosama/src/models/ns_search_anime.dart';
+import 'package:nekosama/src/models/ns_progress.dart';
+import 'package:nekosama/src/models/ns_search_db_stats.dart';
+import 'package:nekosama/src/neko_sama.dart';
+import 'package:nekosama/src/querys/ns_double_query.dart';
+import 'package:nekosama/src/querys/ns_int_query.dart';
+import 'package:nekosama/src/querys/ns_num_query.dart';
+import 'package:nekosama/src/querys/ns_string_query.dart';
 
 
 class NSSearchDb {

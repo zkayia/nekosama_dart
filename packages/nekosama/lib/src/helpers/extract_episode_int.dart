@@ -1,5 +1,5 @@
 
-import 'package:nekosama_dart/src/models/neko_sama_exception.dart';
+import 'package:nekosama/src/models/neko_sama_exception.dart';
 
 
 int extractEpisodeInt(String episode) {

@@ -1,10 +1,10 @@
 
-import 'package:nekosama_dart/src/enums/ns_genres.dart';
-import 'package:nekosama_dart/src/enums/ns_sources.dart';
-import 'package:nekosama_dart/src/enums/ns_statuses.dart';
-import 'package:nekosama_dart/src/enums/ns_types.dart';
-import 'package:nekosama_dart/src/models/ns_anime_base.dart';
-import 'package:nekosama_dart/src/models/ns_titles.dart';
+import 'package:nekosama/src/enums/ns_genres.dart';
+import 'package:nekosama/src/enums/ns_sources.dart';
+import 'package:nekosama/src/enums/ns_statuses.dart';
+import 'package:nekosama/src/enums/ns_types.dart';
+import 'package:nekosama/src/models/ns_anime_base.dart';
+import 'package:nekosama/src/models/ns_titles.dart';
 
 
 abstract class NSAnimeExtendedBase extends NSAnimeBase {

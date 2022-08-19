@@ -1,5 +1,5 @@
 
-import 'package:nekosama_dart/src/models/ns_episode.dart';
+import 'package:nekosama/src/models/ns_episode.dart';
 
 class NSNewEpisode extends NSEpisode {
 

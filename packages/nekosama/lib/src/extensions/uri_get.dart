@@ -2,8 +2,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:nekosama_dart/src/models/neko_sama_exception.dart';
-import 'package:nekosama_dart/src/models/get_url_response.dart';
+import 'package:nekosama/src/models/neko_sama_exception.dart';
+import 'package:nekosama/src/models/get_url_response.dart';
 
 
 extension UriWithGet on Uri {

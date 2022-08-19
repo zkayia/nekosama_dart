@@ -1,5 +1,5 @@
 
-import 'package:nekosama_dart/src/querys/ns_num_query.dart';
+import 'package:nekosama/src/querys/ns_num_query.dart';
 
 
 /// A `int` query model.

@@ -1,12 +1,12 @@
 
-import 'package:nekosama_dart/src/enums/ns_genres.dart';
-import 'package:nekosama_dart/src/enums/ns_sources.dart';
-import 'package:nekosama_dart/src/enums/ns_statuses.dart';
-import 'package:nekosama_dart/src/enums/ns_types.dart';
-import 'package:nekosama_dart/src/extensions/list_map_type.dart';
-import 'package:nekosama_dart/src/helpers/extract_episode_int.dart';
-import 'package:nekosama_dart/src/models/ns_search_anime.dart';
-import 'package:nekosama_dart/src/models/ns_titles.dart';
+import 'package:nekosama/src/enums/ns_genres.dart';
+import 'package:nekosama/src/enums/ns_sources.dart';
+import 'package:nekosama/src/enums/ns_statuses.dart';
+import 'package:nekosama/src/enums/ns_types.dart';
+import 'package:nekosama/src/extensions/list_map_type.dart';
+import 'package:nekosama/src/helpers/extract_episode_int.dart';
+import 'package:nekosama/src/models/ns_search_anime.dart';
+import 'package:nekosama/src/models/ns_titles.dart';
 
 
 NSSearchAnime parseSearchAnime(Map<String, dynamic> nsMap) => NSSearchAnime(

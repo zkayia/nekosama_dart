@@ -1,5 +1,5 @@
 
-import 'package:nekosama_dart/src/models/ns_anime_base.dart';
+import 'package:nekosama/src/models/ns_anime_base.dart';
 
 
 class NSCarouselAnime extends NSAnimeBase {

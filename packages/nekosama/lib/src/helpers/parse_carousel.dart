@@ -1,8 +1,8 @@
 
 import 'package:html/dom.dart';
-import 'package:nekosama_dart/src/models/neko_sama_exception.dart';
-import 'package:nekosama_dart/src/helpers/extract_anime_id.dart';
-import 'package:nekosama_dart/src/models/ns_carousel_anime.dart';
+import 'package:nekosama/src/models/neko_sama_exception.dart';
+import 'package:nekosama/src/helpers/extract_anime_id.dart';
+import 'package:nekosama/src/models/ns_carousel_anime.dart';
 
 
 List<NSCarouselAnime> parseCarousel(Element carousel) => [
