@@ -109,7 +109,7 @@ enum NSGenres {
 	const NSGenres(this.apiName, this.englishName, this.frenchName);
 
 	/// The url of this genre.
-	Uri get url => Uri.parse("https://neko-sama.fr/anime/#{\"genres\":[\"$apiName\"]}");
+	Uri get url => Uri.parse('https://neko-sama.fr/anime/#{"genres":["$apiName"]}');
 
 	/// Contruct a [NSGenres] from a `String`.
 	/// 

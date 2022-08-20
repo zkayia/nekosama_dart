@@ -24,7 +24,7 @@ NSCarouselAnime parseCarouselElement(Element carouselElement) {
 			thumbnail: Uri.parse(carouselElement.getElementsByClassName("lazy").first.attributes["data-src"] ?? ""),
 			episodeCount: int.parse(matches?.group(2) ?? ""),
 		);
-	} catch (e) {
+	} on Exception catch (e) {
 		throw NekoSamaException("unable to extract anime from carousel element: $e");
 	}
 }

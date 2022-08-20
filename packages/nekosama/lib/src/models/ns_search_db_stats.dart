@@ -63,7 +63,9 @@ class NSSearchDbStats {
 
 	@override
 	bool operator ==(Object other) {
-		if (identical(this, other)) return true;
+		if (identical(this, other)) {
+      return true;
+    }
 		final mapEquals = const DeepCollectionEquality().equals;
 		return other is NSSearchDbStats
 			&& other.totalAnimes == totalAnimes

@@ -37,7 +37,9 @@ class NSCarouselAnime extends NSAnimeBase {
 
 	@override
 	bool operator ==(Object other) {
-		if (identical(this, other)) return true;
+		if (identical(this, other)) {
+      return true;
+    }
 		return other is NSCarouselAnime
 			&& other.id == id
 			&& other.title == title

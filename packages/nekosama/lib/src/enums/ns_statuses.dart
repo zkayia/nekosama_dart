@@ -17,7 +17,7 @@ enum NSStatuses {
 	const NSStatuses(this.apiName, this.englishName, this.frenchName);
 
 	/// The url of this status.
-	Uri get url => Uri.parse("https://neko-sama.fr/anime/#{\"status\":[\"$apiName\"]}");
+	Uri get url => Uri.parse('https://neko-sama.fr/anime/#{"status":["$apiName"]}');
 
 	/// Contruct a [NSStatuses] from a `String`.
 	/// 

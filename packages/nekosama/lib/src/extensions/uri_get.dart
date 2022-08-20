@@ -32,7 +32,7 @@ extension UriWithGet on Uri {
 				body: await response.transform(utf8.decoder).join(),
 				timestamp: DateTime.now(),
 			);
-		} catch (e) {
+		} on Exception catch (e) {
 			throw NekoSamaException("failed to get or parse uri '${toString()}', $e");
 		} finally {
 			if (httpClient == null) {

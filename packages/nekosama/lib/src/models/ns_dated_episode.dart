@@ -12,9 +12,9 @@ class NSNewEpisode extends NSEpisode {
 		required super.episodeNumber,
 		required super.thumbnail,
 		required super.url,
-		super.duration,
 		required this.addedAt,
 		required this.episodeTitle,
+		super.duration,
 	});
 
 	@override
@@ -43,7 +43,9 @@ class NSNewEpisode extends NSEpisode {
 
 	@override
 	bool operator ==(Object other) {
-		if (identical(this, other)) return true;
+		if (identical(this, other)) {
+      return true;
+    }
 		return other is NSNewEpisode
 			&& other.animeId == animeId
 			&& other.animeUrl == animeUrl

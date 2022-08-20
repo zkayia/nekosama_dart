@@ -17,7 +17,7 @@ enum NSTypes {
 	const NSTypes(this.apiName, this.englishName, this.frenchName);
 
 	/// The url of this type.
-	Uri get url => Uri.parse("https://neko-sama.fr/anime/#{\"type\":[\"$apiName\"]}");
+	Uri get url => Uri.parse('https://neko-sama.fr/anime/#{"type":["$apiName"]}');
 
 	/// Contruct a `NSTypes` from a `String`.
 	/// 

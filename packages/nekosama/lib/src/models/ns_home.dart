@@ -31,7 +31,9 @@ class NSHome {
 
 	@override
 	bool operator ==(Object other) {
-		if (identical(this, other)) return true;
+		if (identical(this, other)) {
+      return true;
+    }
 		final listEquals = const DeepCollectionEquality().equals;
 		return other is NSHome && listEquals(other.newEpisodes, newEpisodes) && listEquals(other.seasonalAnimes, seasonalAnimes) && listEquals(other.mostPopularAnimes, mostPopularAnimes);
 	}

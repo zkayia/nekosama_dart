@@ -102,7 +102,7 @@ class NSAnime extends NSAnimeExtendedBase {
 		type: NSTypes.values.elementAt(map["type"]),
 		score: map["score"] ?? 0.0,
 		synopsis: map["synopsis"],
-		episodes: List<NSEpisode>.from(map["episodes"]?.map((x) => NSEpisode.fromMap(x))),
+		episodes: List<NSEpisode>.from(map["episodes"]?.map(NSEpisode.fromMap)),
 		startDate: map["startDate"] != null ? DateTime.fromMillisecondsSinceEpoch(map["startDate"]) : null,
 		endDate: map["endDate"] != null ? DateTime.fromMillisecondsSinceEpoch(map["endDate"]) : null,
 	);
@@ -117,7 +117,9 @@ class NSAnime extends NSAnimeExtendedBase {
 
 	@override
 	bool operator ==(Object other) {
-		if (identical(this, other)) return true;
+		if (identical(this, other)) {
+      return true;
+    }
 		final listEquals = const DeepCollectionEquality().equals;
 		return other is NSAnime
 			&& other.id == id

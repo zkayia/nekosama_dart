@@ -103,7 +103,9 @@ class NSSearchAnime extends NSAnimeExtendedBase {
 
 	@override
 	bool operator ==(Object other) {
-		if (identical(this, other)) return true;
+		if (identical(this, other)) {
+      return true;
+    }
 		final listEquals = const DeepCollectionEquality().equals;
 		return other is NSSearchAnime
 			&& other.id == id

@@ -94,7 +94,7 @@ class NekoSama {
 				startDate: extractDate(dates?.first ?? ""),
 				endDate: extractDate(dates?.last ?? ""),
 			);
-		} catch (e) {
+		} on Exception catch (e) {
 			throw NekoSamaException("Failed to get anime at url '$url', $e");
 		}
 	}
@@ -104,7 +104,7 @@ class NekoSama {
 
 	/// Tries to guess the episode urls of [anime].
 	/// 
-	/// Provided as a request-free alternative to [getEpisodes].
+	/// Provided as a request-free alternative to getEpisodes.
 	/// 
 	/// Guessed urls are not guaranteed to be correct.
 	/// 
