@@ -3,10 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:html/parser.dart';
-import 'package:nekosama/src/enums/ns_genres.dart';
-import 'package:nekosama/src/enums/ns_sources.dart';
-import 'package:nekosama/src/enums/ns_statuses.dart';
-import 'package:nekosama/src/enums/ns_types.dart';
+import 'package:nekosama/nekosama.dart';
 import 'package:nekosama/src/helpers/extract_anime_id.dart';
 import 'package:nekosama/src/helpers/extract_episode_int.dart';
 import 'package:nekosama/src/helpers/extract_date.dart';
@@ -14,13 +11,6 @@ import 'package:nekosama/src/helpers/extract_new_episodes.dart';
 import 'package:nekosama/src/extensions/uri_get.dart';
 import 'package:nekosama/src/helpers/parse_carousel.dart';
 import 'package:nekosama/src/helpers/parse_episode_duration.dart';
-import 'package:nekosama/src/models/neko_sama_exception.dart';
-import 'package:nekosama/src/models/ns_anime.dart';
-import 'package:nekosama/src/models/ns_anime_base.dart';
-import 'package:nekosama/src/models/ns_carousel_anime.dart';
-import 'package:nekosama/src/models/ns_episode.dart';
-import 'package:nekosama/src/models/ns_home.dart';
-import 'package:nekosama/src/models/ns_titles.dart';
 
 
 /// The main api for the `nekosama` library.
