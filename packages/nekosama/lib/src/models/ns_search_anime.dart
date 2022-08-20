@@ -6,6 +6,7 @@ import 'package:nekosama/src/enums/ns_genres.dart';
 import 'package:nekosama/src/enums/ns_sources.dart';
 import 'package:nekosama/src/enums/ns_statuses.dart';
 import 'package:nekosama/src/enums/ns_types.dart';
+import 'package:nekosama/src/helpers/extract_episode_int.dart';
 import 'package:nekosama/src/models/ns_anime_extended_base.dart';
 import 'package:nekosama/src/models/ns_titles.dart';
 
@@ -96,6 +97,36 @@ class NSSearchAnime extends NSAnimeExtendedBase {
   String toJson() => json.encode(toMap());
 
   factory NSSearchAnime.fromJson(String source) => NSSearchAnime.fromMap(json.decode(source));
+
+  factory NSSearchAnime.fromSearchDbMap(
+    Map<String, dynamic> nsMap,
+    {
+      NSSources source=NSSources.vostfr,
+    }
+  ) => NSSearchAnime(
+    id: nsMap["id"] ?? 0,
+    title: nsMap["title"] ?? "",
+    titles: NSTitles.fromMap({
+      "animeId": nsMap["id"] ?? 0,
+      "english": nsMap["title_english"],
+      "romanji": nsMap["title_romanji"],
+      "french": nsMap["title_french"],
+      "others": nsMap["others"],
+    }),
+    genres: [
+      for (final e in (nsMap["genres"] as List?) ?? [])
+        NSGenres.fromString(e),
+    ].whereType<NSGenres>().toList(),
+    source: source,
+    status: NSStatuses.fromString(nsMap["status"] ?? "") ?? NSStatuses.aired,
+    type: NSTypes.fromString(nsMap["type"] ?? "") ?? NSTypes.tv,
+    year: int.tryParse(nsMap["start_date_year"] ?? "0") ?? 0,
+    popularity: nsMap["popularity"] ?? 0.0,
+    score: double.tryParse(nsMap["score"] ?? "0.0") ?? 0.0,
+    url: Uri.parse("https://neko-sama.fr${nsMap["url"] ?? ""}"),
+    thumbnail: Uri.tryParse(nsMap["url_image"] ?? "") ?? Uri(),
+    episodeCount: extractEpisodeInt(nsMap["nb_eps"] ?? "0"),
+  );
 
   @override
   String toString() =>

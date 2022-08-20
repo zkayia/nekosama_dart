@@ -94,7 +94,7 @@ class NekoSama {
 
   /// Tries to guess the episode urls of [anime].
   /// 
-  /// Provided as a request-free alternative to getEpisodes.
+  /// Provided as a request-free alternative to [getEpisodes].
   /// 
   /// Guessed urls are not guaranteed to be correct.
   /// 
@@ -124,6 +124,16 @@ class NekoSama {
         ),
     ];
   }
+
+  /// Gets the [NSEpisode] list of [anime].
+  /// 
+  /// Returns `null` if no episodes were found.
+  Future<List<NSEpisode>?> getEpisodes(NSAnimeBase anime) async => anime is NSAnime
+    ? anime.episodes
+    : await _getEpisodes(
+      anime.id,
+      anime.url,
+    );
 
   Future<List<NSEpisode>?> _getEpisodes(int animeId, Uri animeUrl, [String? animePageBody]) async {
     try {
@@ -160,6 +170,47 @@ class NekoSama {
       );
     } on Exception catch (e) {
       throw NekoSamaException("Failed to get the video link, $e");
+    }
+  }
+
+  /// Gets the search db and parses it into a list of NSSearchAnime.
+  /// 
+  /// See [getRawSearchDb] for more.
+  Future<List<NSSearchAnime>> getSearchDb() async {
+    try {
+      return [
+        ...(await getRawSearchDb()).map(
+          (e) => NSSearchAnime.fromSearchDbMap(e, source: source),
+        ),
+      ];
+    } on NekoSamaException catch (_) {
+      rethrow;
+    } on Exception catch (e) {
+      throw NekoSamaException("Failed to build a NSSearchAnime from the search db, $e");
+    }
+  }
+
+  /// Gets the search db, a json list of all animes.
+  /// 
+  /// Vostfr: https://neko-sama.fr/animes-search-vostfr.json
+  /// 
+  /// Vf: https://neko-sama.fr/animes-search-vf.json
+  Future<List<Map<String, dynamic>>> getRawSearchDb() async {
+    try {
+      return [
+        ...(
+          jsonDecode(
+            (
+              await Uri.https(
+                "neko-sama.fr",
+                "/animes-search-${source.name}.json",
+              ).get(httpClient: httpClient)
+            ).body,
+          ) as List
+        ).whereType<Map<String, dynamic>>()
+      ];
+    } on Exception catch (e) {
+      throw NekoSamaException("Failed to fetch/parse the search db, $e");
     }
   }
 }
