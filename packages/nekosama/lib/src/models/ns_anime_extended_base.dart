@@ -9,24 +9,24 @@ import 'package:nekosama/src/models/ns_titles.dart';
 
 abstract class NSAnimeExtendedBase extends NSAnimeBase {
 
-	final NSTitles titles;
-	final List<NSGenres> genres;
-	final NSSources source;
-	final NSStatuses status;
-	final NSTypes type;
-	final double score;
+  final NSTitles titles;
+  final List<NSGenres> genres;
+  final NSSources source;
+  final NSStatuses status;
+  final NSTypes type;
+  final double score;
 
-	NSAnimeExtendedBase({
-		required super.id,
-		required super.title,
-		required super.url,
-		required super.thumbnail,
-		required super.episodeCount,
-		required this.titles,
-		required this.genres,
-		required this.source,
-		required this.status,
-		required this.type,
-		required this.score,
-	});
+  NSAnimeExtendedBase({
+    required super.id,
+    required super.title,
+    required super.url,
+    required super.thumbnail,
+    required super.episodeCount,
+    required this.titles,
+    required this.genres,
+    required this.source,
+    required this.status,
+    required this.type,
+    required this.score,
+  });
 }

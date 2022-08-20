@@ -2,10 +2,10 @@
 
 class NekoSamaException implements Exception {
 
-	final String message;
+  final String message;
 
-	NekoSamaException(this.message) : super();
+  NekoSamaException(this.message) : super();
 
-	@override
-	String toString() => "NekoSamaException: $message";
+  @override
+  String toString() => "NekoSamaException: $message";
 }

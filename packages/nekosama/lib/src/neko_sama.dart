@@ -25,151 +25,151 @@ import 'package:nekosama/src/models/ns_titles.dart';
 
 /// The main api for the `nekosama` library.
 class NekoSama {
-	/// The source type to use when interacting with `neko-sama.fr`.
-	final NSSources source;
-	/// An optional `HttpClient` to use to make requests.
-	final HttpClient httpClient;
+  /// The source type to use when interacting with `neko-sama.fr`.
+  final NSSources source;
+  /// An optional `HttpClient` to use to make requests.
+  final HttpClient httpClient;
 
-	/// The main api for the `nekosama` library.
-	NekoSama({
-		this.source=NSSources.vostfr,
-		HttpClient? httpClient,
-	}) : httpClient = httpClient ?? HttpClient();
+  /// The main api for the `nekosama` library.
+  NekoSama({
+    this.source=NSSources.vostfr,
+    HttpClient? httpClient,
+  }) : httpClient = httpClient ?? HttpClient();
 
-	/// Gets the home page.
-	Future<NSHome> getHome() async {
-		final homePageResponse = await Uri.https("neko-sama.fr", "").get(
-			httpClient: httpClient,
-		);
-		final carousels = parse(homePageResponse.body).getElementsByClassName("row anime-listing");
-		return NSHome(
-			newEpisodes: extractNewEpisodes(homePageResponse),
-			seasonalAnimes: parseCarousel(carousels.first),
-			mostPopularAnimes: parseCarousel(carousels.last),
-		);
-	}
+  /// Gets the home page.
+  Future<NSHome> getHome() async {
+    final homePageResponse = await Uri.https("neko-sama.fr", "").get(
+      httpClient: httpClient,
+    );
+    final carousels = parse(homePageResponse.body).getElementsByClassName("row anime-listing");
+    return NSHome(
+      newEpisodes: extractNewEpisodes(homePageResponse),
+      seasonalAnimes: parseCarousel(carousels.first),
+      mostPopularAnimes: parseCarousel(carousels.last),
+    );
+  }
 
-	/// Gets an [NSAnime] from it's url.
-	Future<NSAnime> getAnime(Uri url) async {
-		try {
-			final animePageBody = (await url.get(httpClient: httpClient)).body;
-			final document = parse(animePageBody);
-			final	id = extractAnimeIdFromLink(url);
-			final title = document.getElementsByTagName("h1").first;
-			final infos = document.getElementById("anime-info-list")?.children;
-			final synopsisRaw = document.querySelector(".synopsis > p")?.text.trim();
-			final synopsis = synopsisRaw == null || synopsisRaw.toLowerCase().contains("aucun synopsis pour le moment")
-				? null
-				: synopsisRaw;
-			final episodes = (await _getEpisodes(id, url, animePageBody)) ?? [];
-			final dates = infos?.last.text.split("-");
-			return NSAnime(
-				id: id,
-				title: title.firstChild?.text?.replaceAll("VOSTFR", "").trim() ?? "",
-				url: url,
-				thumbnail: Uri.tryParse(document.querySelector(".cover > img")?.attributes["src"] ?? "") ?? Uri(),
-				episodeCount: extractEpisodeInt(infos?.elementAt(3).text ?? "?"),
-				titles: NSTitles(
-					animeId: id,
-					others: title.nodes.last.text,
-				),
-				genres: [
-					for (final e in document.getElementsByClassName("tag list").first.children)
-						NSGenres.fromString(
-							RegExp(r"\[\W+([\w\s\-]+)\W").firstMatch(e.attributes["href"] ?? "")?.group(1) ?? "",
-						),
-				].whereType<NSGenres>().toList(),
-				source: source,
-				status: NSStatuses.fromString(
-					RegExp(r"^\s\w+(.+)").firstMatch(infos?.elementAt(2).text ?? "")?.group(1) ?? "",
-				) ?? NSStatuses.aired,
-				type: NSTypes.fromString(
-					RegExp(r"^\s\w+(.+)").firstMatch(infos?.elementAt(1).text ?? "")?.group(1) ?? "",
-				) ?? NSTypes.tv,
-				score: double.tryParse(
-					RegExp(r"(\d+\.?\d*)\/5").firstMatch(infos?.first.text ?? "")?.group(1) ?? "",
-				) ?? 0.0,
-				synopsis: synopsis,
-				episodes: episodes,
-				startDate: extractDate(dates?.first ?? ""),
-				endDate: extractDate(dates?.last ?? ""),
-			);
-		} on Exception catch (e) {
-			throw NekoSamaException("Failed to get anime at url '$url', $e");
-		}
-	}
+  /// Gets an [NSAnime] from it's url.
+  Future<NSAnime> getAnime(Uri url) async {
+    try {
+      final animePageBody = (await url.get(httpClient: httpClient)).body;
+      final document = parse(animePageBody);
+      final  id = extractAnimeIdFromLink(url);
+      final title = document.getElementsByTagName("h1").first;
+      final infos = document.getElementById("anime-info-list")?.children;
+      final synopsisRaw = document.querySelector(".synopsis > p")?.text.trim();
+      final synopsis = synopsisRaw == null || synopsisRaw.toLowerCase().contains("aucun synopsis pour le moment")
+        ? null
+        : synopsisRaw;
+      final episodes = (await _getEpisodes(id, url, animePageBody)) ?? [];
+      final dates = infos?.last.text.split("-");
+      return NSAnime(
+        id: id,
+        title: title.firstChild?.text?.replaceAll("VOSTFR", "").trim() ?? "",
+        url: url,
+        thumbnail: Uri.tryParse(document.querySelector(".cover > img")?.attributes["src"] ?? "") ?? Uri(),
+        episodeCount: extractEpisodeInt(infos?.elementAt(3).text ?? "?"),
+        titles: NSTitles(
+          animeId: id,
+          others: title.nodes.last.text,
+        ),
+        genres: [
+          for (final e in document.getElementsByClassName("tag list").first.children)
+            NSGenres.fromString(
+              RegExp(r"\[\W+([\w\s\-]+)\W").firstMatch(e.attributes["href"] ?? "")?.group(1) ?? "",
+            ),
+        ].whereType<NSGenres>().toList(),
+        source: source,
+        status: NSStatuses.fromString(
+          RegExp(r"^\s\w+(.+)").firstMatch(infos?.elementAt(2).text ?? "")?.group(1) ?? "",
+        ) ?? NSStatuses.aired,
+        type: NSTypes.fromString(
+          RegExp(r"^\s\w+(.+)").firstMatch(infos?.elementAt(1).text ?? "")?.group(1) ?? "",
+        ) ?? NSTypes.tv,
+        score: double.tryParse(
+          RegExp(r"(\d+\.?\d*)\/5").firstMatch(infos?.first.text ?? "")?.group(1) ?? "",
+        ) ?? 0.0,
+        synopsis: synopsis,
+        episodes: episodes,
+        startDate: extractDate(dates?.first ?? ""),
+        endDate: extractDate(dates?.last ?? ""),
+      );
+    } on Exception catch (e) {
+      throw NekoSamaException("Failed to get anime at url '$url', $e");
+    }
+  }
 
-	/// Gets an [NSAnime] from a [NSCarouselAnime].
-	Future<NSAnime> getFullAnime(NSAnimeBase anime) async => getAnime(anime.url);
+  /// Gets an [NSAnime] from a [NSCarouselAnime].
+  Future<NSAnime> getFullAnime(NSAnimeBase anime) async => getAnime(anime.url);
 
-	/// Tries to guess the episode urls of [anime].
-	/// 
-	/// Provided as a request-free alternative to getEpisodes.
-	/// 
-	/// Guessed urls are not guaranteed to be correct.
-	/// 
-	/// If [anime] has 0 episodes, tries to fetch episodes and
-	/// returns `null` if no episodes were found.
-	Future<List<Uri>?> guessEpisodeUrls(NSAnimeBase anime) async {
-		if (anime is NSAnime) {
-			return [...anime.episodes.map((e) => e.url)];
-		}
-		String zeroPadInt(int number) => "${number < 10 ? "0": ""}$number";
-		if (anime.episodeCount == 0) {
-			final eps = await _getEpisodes(anime.id, anime.url);
-			return eps == null
-				? null
-				: [...eps.map((e) => e.url)];
-		}
-		return [
-			for (var i = 1; i < anime.episodeCount+1; i++)
-				Uri.parse(
-					anime.url
-						.toString()
-						.replaceFirst("/info/", "/episode/")
-						.replaceFirst(
-							RegExp("-${source.apiName}\$"),
-							"-${zeroPadInt(i)}-${source.apiName}",
-						),
-				),
-		];
-	}
+  /// Tries to guess the episode urls of [anime].
+  /// 
+  /// Provided as a request-free alternative to getEpisodes.
+  /// 
+  /// Guessed urls are not guaranteed to be correct.
+  /// 
+  /// If [anime] has 0 episodes, tries to fetch episodes and
+  /// returns `null` if no episodes were found.
+  Future<List<Uri>?> guessEpisodeUrls(NSAnimeBase anime) async {
+    if (anime is NSAnime) {
+      return [...anime.episodes.map((e) => e.url)];
+    }
+    String zeroPadInt(int number) => "${number < 10 ? "0": ""}$number";
+    if (anime.episodeCount == 0) {
+      final eps = await _getEpisodes(anime.id, anime.url);
+      return eps == null
+        ? null
+        : [...eps.map((e) => e.url)];
+    }
+    return [
+      for (var i = 1; i < anime.episodeCount+1; i++)
+        Uri.parse(
+          anime.url
+            .toString()
+            .replaceFirst("/info/", "/episode/")
+            .replaceFirst(
+              RegExp("-${source.apiName}\$"),
+              "-${zeroPadInt(i)}-${source.apiName}",
+            ),
+        ),
+    ];
+  }
 
-	Future<List<NSEpisode>?> _getEpisodes(int animeId, Uri animeUrl, [String? animePageBody]) async {
-		try {
-			final rawEps = RegExp(r"(?<=var\sepisodes\s=\s)\[.+\](?=;)")
-				.firstMatch(animePageBody ?? (await animeUrl.get(httpClient: httpClient)).body)?.group(0);
-			if (rawEps == null) {
-				return null;
-			}
-			return [
-				for (final Map<String, dynamic> episode in jsonDecode(rawEps))
-					NSEpisode(
-						animeId: animeId,
-						animeUrl: animeUrl,
-						episodeNumber: extractEpisodeInt(episode["episode"]),
-						thumbnail: Uri.tryParse(episode["url_image"] ?? "") ?? Uri(),
-						url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
-						duration: parseEpisodeDuration(episode["time"]),
-					),
-			];
-		} on Exception catch (e) {
-			throw NekoSamaException("Failed to parse episodes for anime at url '$animeUrl', $e");
-		}
-	}
+  Future<List<NSEpisode>?> _getEpisodes(int animeId, Uri animeUrl, [String? animePageBody]) async {
+    try {
+      final rawEps = RegExp(r"(?<=var\sepisodes\s=\s)\[.+\](?=;)")
+        .firstMatch(animePageBody ?? (await animeUrl.get(httpClient: httpClient)).body)?.group(0);
+      if (rawEps == null) {
+        return null;
+      }
+      return [
+        for (final Map<String, dynamic> episode in jsonDecode(rawEps))
+          NSEpisode(
+            animeId: animeId,
+            animeUrl: animeUrl,
+            episodeNumber: extractEpisodeInt(episode["episode"]),
+            thumbnail: Uri.tryParse(episode["url_image"] ?? "") ?? Uri(),
+            url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
+            duration: parseEpisodeDuration(episode["time"]),
+          ),
+      ];
+    } on Exception catch (e) {
+      throw NekoSamaException("Failed to parse episodes for anime at url '$animeUrl', $e");
+    }
+  }
 
-	/// Gets the url of the video player embed of [episode].
-	/// 
-	/// Currently only supports episode videos hosted on `pstream.net`.
-	Future<Uri?> getVideoUrl(NSEpisode episode) async {
-		try {
-			return Uri.tryParse(
-				RegExp(r"=\s'(https://www.pstream.net/e/.+)'")
-					.firstMatch((await episode.url.get(httpClient: httpClient)).body,
-				)?.group(1) ?? "",
-			);
-		} on Exception catch (e) {
-			throw NekoSamaException("Failed to get the video link, $e");
-		}
-	}
+  /// Gets the url of the video player embed of [episode].
+  /// 
+  /// Currently only supports episode videos hosted on `pstream.net`.
+  Future<Uri?> getVideoUrl(NSEpisode episode) async {
+    try {
+      return Uri.tryParse(
+        RegExp(r"=\s'(https://www.pstream.net/e/.+)'")
+          .firstMatch((await episode.url.get(httpClient: httpClient)).body,
+        )?.group(1) ?? "",
+      );
+    } on Exception catch (e) {
+      throw NekoSamaException("Failed to get the video link, $e");
+    }
+  }
 }

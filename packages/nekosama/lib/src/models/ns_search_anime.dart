@@ -12,129 +12,129 @@ import 'package:nekosama/src/models/ns_titles.dart';
 
 class NSSearchAnime extends NSAnimeExtendedBase {
 
-	final int year;
-	final double popularity;
-	
-	NSSearchAnime({
-		required super.id,
-		required super.title,
-		required super.titles,
-		required super.genres,
-		required super.source,
-		required super.status,
-		required super.type,
-		required super.score,
-		required super.url,
-		required super.thumbnail,
-		required super.episodeCount,
-		required this.year,
-		required this.popularity,
-	});
+  final int year;
+  final double popularity;
+  
+  NSSearchAnime({
+    required super.id,
+    required super.title,
+    required super.titles,
+    required super.genres,
+    required super.source,
+    required super.status,
+    required super.type,
+    required super.score,
+    required super.url,
+    required super.thumbnail,
+    required super.episodeCount,
+    required this.year,
+    required this.popularity,
+  });
 
-	NSSearchAnime copyWith({
-		int? id,
-		String? title,
-		NSTitles? titles,
-		List<NSGenres>? genres,
-		NSSources? source,
-		NSStatuses? status,
-		NSTypes? type,
-		double? score,
-		Uri? url,
-		Uri? thumbnail,
-		int? episodeCount,
-		int? year,
-		double? popularity,
-	}) => NSSearchAnime(
-		id: id ?? this.id,
-		title: title ?? this.title,
-		titles: titles ?? this.titles,
-		genres: genres ?? this.genres,
-		source: source ?? this.source,
-		status: status ?? this.status,
-		type: type ?? this.type,
-		score: score ?? this.score,
-		url: url ?? this.url,
-		thumbnail: thumbnail ?? this.thumbnail,
-		episodeCount: episodeCount ?? this.episodeCount,
-		year: year ?? this.year,
-		popularity: popularity ?? this.popularity,
-	);
+  NSSearchAnime copyWith({
+    int? id,
+    String? title,
+    NSTitles? titles,
+    List<NSGenres>? genres,
+    NSSources? source,
+    NSStatuses? status,
+    NSTypes? type,
+    double? score,
+    Uri? url,
+    Uri? thumbnail,
+    int? episodeCount,
+    int? year,
+    double? popularity,
+  }) => NSSearchAnime(
+    id: id ?? this.id,
+    title: title ?? this.title,
+    titles: titles ?? this.titles,
+    genres: genres ?? this.genres,
+    source: source ?? this.source,
+    status: status ?? this.status,
+    type: type ?? this.type,
+    score: score ?? this.score,
+    url: url ?? this.url,
+    thumbnail: thumbnail ?? this.thumbnail,
+    episodeCount: episodeCount ?? this.episodeCount,
+    year: year ?? this.year,
+    popularity: popularity ?? this.popularity,
+  );
 
-	Map<String, dynamic> toMap() => {
-		"id": id,
-		"title": title,
-		"titles": titles.toMap(),
-		"genres": genres.map((x) => x.index).toList(),
-		"source": source.index,
-		"status": status.index,
-		"type": type.index,
-		"score": score,
-		"url": url.toString(),
-		"thumbnail": thumbnail.toString(),
-		"episodeCount": episodeCount,
-		"year": year,
-		"popularity": popularity,
-	};
+  Map<String, dynamic> toMap() => {
+    "id": id,
+    "title": title,
+    "titles": titles.toMap(),
+    "genres": genres.map((x) => x.index).toList(),
+    "source": source.index,
+    "status": status.index,
+    "type": type.index,
+    "score": score,
+    "url": url.toString(),
+    "thumbnail": thumbnail.toString(),
+    "episodeCount": episodeCount,
+    "year": year,
+    "popularity": popularity,
+  };
 
-	factory NSSearchAnime.fromMap(Map<String, dynamic> map) => NSSearchAnime(
-		id: map["id"] ?? 0,
-		title: map["title"] ?? "",
-		titles: NSTitles.fromMap(map["titles"]),
-		genres: List<NSGenres>.from(map["genres"]?.map((x) => NSGenres.values.elementAt(x))),
-		source: NSSources.values.elementAt(map["source"]),
-		status: NSStatuses.values.elementAt(map["status"]),
-		type: NSTypes.values.elementAt(map["type"]),
-		score: map["score"] ?? 0.0,
-		url: Uri.tryParse(map["url"] ?? "") ?? Uri(),
-		thumbnail: Uri.tryParse(map["thumbnail"] ?? "") ?? Uri(),
-		episodeCount: map["episodeCount"] ?? 0,
-		year: map["year"] ?? 0,
-		popularity: map["popularity"] ?? 0.0,
-	);
+  factory NSSearchAnime.fromMap(Map<String, dynamic> map) => NSSearchAnime(
+    id: map["id"] ?? 0,
+    title: map["title"] ?? "",
+    titles: NSTitles.fromMap(map["titles"]),
+    genres: List<NSGenres>.from(map["genres"]?.map((x) => NSGenres.values.elementAt(x))),
+    source: NSSources.values.elementAt(map["source"]),
+    status: NSStatuses.values.elementAt(map["status"]),
+    type: NSTypes.values.elementAt(map["type"]),
+    score: map["score"] ?? 0.0,
+    url: Uri.tryParse(map["url"] ?? "") ?? Uri(),
+    thumbnail: Uri.tryParse(map["thumbnail"] ?? "") ?? Uri(),
+    episodeCount: map["episodeCount"] ?? 0,
+    year: map["year"] ?? 0,
+    popularity: map["popularity"] ?? 0.0,
+  );
 
-	String toJson() => json.encode(toMap());
+  String toJson() => json.encode(toMap());
 
-	factory NSSearchAnime.fromJson(String source) => NSSearchAnime.fromMap(json.decode(source));
+  factory NSSearchAnime.fromJson(String source) => NSSearchAnime.fromMap(json.decode(source));
 
-	@override
-	String toString() =>
-		"NSSearchAnime(id: $id, title: $title, titles: $titles, genres: $genres, source: $source, status: $status, type: $type, score: $score, url: $url, thumbnail: $thumbnail, episodeCount: $episodeCount, year: $year, popularity: $popularity)";
+  @override
+  String toString() =>
+    "NSSearchAnime(id: $id, title: $title, titles: $titles, genres: $genres, source: $source, status: $status, type: $type, score: $score, url: $url, thumbnail: $thumbnail, episodeCount: $episodeCount, year: $year, popularity: $popularity)";
 
-	@override
-	bool operator ==(Object other) {
-		if (identical(this, other)) {
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
       return true;
     }
-		final listEquals = const DeepCollectionEquality().equals;
-		return other is NSSearchAnime
-			&& other.id == id
-			&& other.title == title
-			&& other.titles == titles
-			&& listEquals(other.genres, genres)
-			&& other.source == source
-			&& other.status == status
-			&& other.type == type
-			&& other.score == score
-			&& other.url == url
-			&& other.thumbnail == thumbnail
-			&& other.episodeCount == episodeCount
-			&& other.year == year
-			&& other.popularity == popularity;
-	}
+    final listEquals = const DeepCollectionEquality().equals;
+    return other is NSSearchAnime
+      && other.id == id
+      && other.title == title
+      && other.titles == titles
+      && listEquals(other.genres, genres)
+      && other.source == source
+      && other.status == status
+      && other.type == type
+      && other.score == score
+      && other.url == url
+      && other.thumbnail == thumbnail
+      && other.episodeCount == episodeCount
+      && other.year == year
+      && other.popularity == popularity;
+  }
 
-	@override
-	int get hashCode => id.hashCode
-		^ title.hashCode
-		^ titles.hashCode
-		^ genres.hashCode
-		^ source.hashCode
-		^ status.hashCode
-		^ type.hashCode
-		^ score.hashCode
-		^ url.hashCode
-		^ thumbnail.hashCode
-		^ episodeCount.hashCode
-		^ year.hashCode
-		^ popularity.hashCode;
+  @override
+  int get hashCode => id.hashCode
+    ^ title.hashCode
+    ^ titles.hashCode
+    ^ genres.hashCode
+    ^ source.hashCode
+    ^ status.hashCode
+    ^ type.hashCode
+    ^ score.hashCode
+    ^ url.hashCode
+    ^ thumbnail.hashCode
+    ^ episodeCount.hashCode
+    ^ year.hashCode
+    ^ popularity.hashCode;
 }

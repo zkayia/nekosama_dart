@@ -4,36 +4,36 @@ library nekosama;
 
 
 export 'package:nekosama/src/enums/ns_genres.dart' show 
-	NSGenres;
+  NSGenres;
 export 'package:nekosama/src/enums/ns_sources.dart' show
-	NSSources;
+  NSSources;
 export 'package:nekosama/src/enums/ns_statuses.dart' show
-	NSStatuses;
+  NSStatuses;
 export 'package:nekosama/src/enums/ns_types.dart' show
-	NSTypes;
+  NSTypes;
 
 export 'package:nekosama/src/models/neko_sama_exception.dart' show
-	NekoSamaException;
+  NekoSamaException;
 export 'package:nekosama/src/models/ns_anime_base.dart' show
-	NSAnimeBase;
+  NSAnimeBase;
 export 'package:nekosama/src/models/ns_anime_extended_base.dart' show
-	NSAnimeExtendedBase;
+  NSAnimeExtendedBase;
 export 'package:nekosama/src/models/ns_anime.dart' show
-	NSAnime;
+  NSAnime;
 export 'package:nekosama/src/models/ns_carousel_anime.dart' show
-	NSCarouselAnime;
+  NSCarouselAnime;
 export 'package:nekosama/src/models/ns_episode.dart' show
-	NSEpisode;
+  NSEpisode;
 export 'package:nekosama/src/models/ns_home.dart' show
-	NSHome;
+  NSHome;
 export 'package:nekosama/src/models/ns_dated_episode.dart' show
-	NSNewEpisode;
+  NSNewEpisode;
 export 'package:nekosama/src/models/ns_search_anime.dart' show
-	NSSearchAnime;
+  NSSearchAnime;
 export 'package:nekosama/src/models/ns_search_db_stats.dart' show
-	NSSearchDbStats;
+  NSSearchDbStats;
 export 'package:nekosama/src/models/ns_titles.dart' show
-	NSTitles;
+  NSTitles;
 
 export 'package:nekosama/src/neko_sama.dart' show
-	NekoSama;
+  NekoSama;
