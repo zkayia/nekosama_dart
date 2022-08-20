@@ -13,8 +13,4 @@ environment:
 
 dependencies: 
   collection: ^1.16.0
-  hive: ^2.1.0
   html: ^0.15.0
-
-dev_dependencies:
-  lints: ^2.0.0
