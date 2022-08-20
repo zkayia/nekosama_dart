@@ -2,7 +2,6 @@
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
-
 import 'package:nekosama/src/enums/ns_genres.dart';
 import 'package:nekosama/src/enums/ns_statuses.dart';
 import 'package:nekosama/src/enums/ns_types.dart';

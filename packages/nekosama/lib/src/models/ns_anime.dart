@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 
-import 'package:nekosama/src/enums/enums_db_adaptors.dart';
 import 'package:nekosama/src/enums/ns_genres.dart';
 import 'package:nekosama/src/enums/ns_sources.dart';
 import 'package:nekosama/src/enums/ns_statuses.dart';
@@ -79,10 +78,10 @@ class NSAnime extends NSAnimeExtendedBase {
 		"thumbnail": thumbnail.toString(),
 		"episodeCount": episodeCount,
 		"titles": titles.toMap(),
-		"genres": genres.map((x) => enumToDb(x)).toList(),
-		"source": enumToDb(source),
-		"status": enumToDb(status),
-		"type": enumToDb(type),
+		"genres": genres.map((x) => x.index).toList(),
+		"source": source.index,
+		"status": status.index,
+		"type": type.index,
 		"score": score,
 		"synopsis": synopsis,
 		"episodes": episodes.map((x) => x.toMap()).toList(),
@@ -97,10 +96,10 @@ class NSAnime extends NSAnimeExtendedBase {
 		thumbnail: Uri.tryParse(map["thumbnail"] ?? "") ?? Uri(),
 		episodeCount: map["episodeCount"] ?? 0,
 		titles: NSTitles.fromMap(map["titles"]),
-		genres: List<NSGenres>.from(map["genres"]?.map((x) => enumFromDb(NSGenres.values, x))),
-		source: enumFromDb(NSSources.values, map["source"]),
-		status: enumFromDb(NSStatuses.values, map["status"]),
-		type: enumFromDb(NSTypes.values, map["type"]),
+		genres: List<NSGenres>.from(map["genres"]?.map((x) => NSGenres.values.elementAt(x))),
+		source: NSSources.values.elementAt(map["source"]),
+		status: NSStatuses.values.elementAt(map["status"]),
+		type: NSTypes.values.elementAt(map["type"]),
 		score: map["score"] ?? 0.0,
 		synopsis: map["synopsis"],
 		episodes: List<NSEpisode>.from(map["episodes"]?.map((x) => NSEpisode.fromMap(x))),

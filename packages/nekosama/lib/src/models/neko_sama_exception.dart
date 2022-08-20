@@ -7,5 +7,5 @@ class NekoSamaException implements Exception {
 	NekoSamaException(this.message) : super();
 
 	@override
-  String toString() => "NekoSamaException: $message";
+	String toString() => "NekoSamaException: $message";
 }

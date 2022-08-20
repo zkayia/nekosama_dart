@@ -7,7 +7,6 @@ import 'package:nekosama/src/enums/ns_genres.dart';
 import 'package:nekosama/src/enums/ns_sources.dart';
 import 'package:nekosama/src/enums/ns_statuses.dart';
 import 'package:nekosama/src/enums/ns_types.dart';
-import 'package:nekosama/src/extensions/list_map_type.dart';
 import 'package:nekosama/src/helpers/extract_anime_id.dart';
 import 'package:nekosama/src/helpers/extract_episode_int.dart';
 import 'package:nekosama/src/helpers/extract_date.dart';
@@ -19,11 +18,9 @@ import 'package:nekosama/src/models/neko_sama_exception.dart';
 import 'package:nekosama/src/models/ns_anime.dart';
 import 'package:nekosama/src/models/ns_anime_base.dart';
 import 'package:nekosama/src/models/ns_carousel_anime.dart';
-import 'package:nekosama/src/models/ns_search_anime.dart';
 import 'package:nekosama/src/models/ns_episode.dart';
 import 'package:nekosama/src/models/ns_home.dart';
 import 'package:nekosama/src/models/ns_titles.dart';
-import 'package:nekosama/src/search_db.dart';
 
 
 /// The main api for the `nekosama` library.
@@ -32,16 +29,12 @@ class NekoSama {
 	final NSSources source;
 	/// An optional `HttpClient` to use to make requests.
 	final HttpClient httpClient;
-	/// The search database handler.
-	late NSSearchDb searchDb;
 
 	/// The main api for the `nekosama` library.
 	NekoSama({
 		this.source=NSSources.vostfr,
 		HttpClient? httpClient,
-	}) : httpClient = httpClient ?? HttpClient() {
-		searchDb = NSSearchDb(this);
-	}
+	}) : httpClient = httpClient ?? HttpClient();
 
 	/// Gets the home page.
 	Future<NSHome> getHome() async {
@@ -80,11 +73,12 @@ class NekoSama {
 					animeId: id,
 					others: title.nodes.last.text,
 				),
-				genres: document.getElementsByClassName("tag list").first.children.mapType<NSGenres>(
-					(e) => NSGenres.fromString(
-						RegExp(r"\[\W+([\w\s\-]+)\W").firstMatch(e.attributes["href"] ?? "")?.group(1) ?? "",
-					),
-				),
+				genres: [
+					for (final e in document.getElementsByClassName("tag list").first.children)
+						NSGenres.fromString(
+							RegExp(r"\[\W+([\w\s\-]+)\W").firstMatch(e.attributes["href"] ?? "")?.group(1) ?? "",
+						),
+				].whereType<NSGenres>().toList(),
 				source: source,
 				status: NSStatuses.fromString(
 					RegExp(r"^\s\w+(.+)").firstMatch(infos?.elementAt(2).text ?? "")?.group(1) ?? "",
@@ -105,7 +99,7 @@ class NekoSama {
 		}
 	}
 
-	/// Gets an [NSAnime] from a [NSSearchAnime] or [NSCarouselAnime].
+	/// Gets an [NSAnime] from a [NSCarouselAnime].
 	Future<NSAnime> getFullAnime(NSAnimeBase anime) async => getAnime(anime.url);
 
 	/// Tries to guess the episode urls of [anime].
@@ -159,7 +153,7 @@ class NekoSama {
 						duration: parseEpisodeDuration(episode["time"]),
 					),
 			];
-		} catch (e) {
+		} on Exception catch (e) {
 			throw NekoSamaException("Failed to parse episodes for anime at url '$animeUrl', $e");
 		}
 	}
@@ -174,7 +168,7 @@ class NekoSama {
 					.firstMatch((await episode.url.get(httpClient: httpClient)).body,
 				)?.group(1) ?? "",
 			);
-		} catch (e) {
+		} on Exception catch (e) {
 			throw NekoSamaException("Failed to get the video link, $e");
 		}
 	}
