@@ -1,7 +1,7 @@
 
 name: nekosama_hive
 description: Unofficial dart api for neko-sama.fr with Hive powered search.
-version: 1.0.0
+version: 2.0.0
 homepage: https://github.com/zkayia/nekosama_dart
 issue_tracker: https://github.com/zkayia/nekosama_dart/issues
 repository: https://github.com/zkayia/nekosama_dart
