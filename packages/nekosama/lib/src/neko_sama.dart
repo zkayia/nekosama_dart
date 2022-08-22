@@ -26,11 +26,12 @@ class NekoSama {
     HttpClient? httpClient,
   }) : httpClient = httpClient ?? HttpClient();
 
+  // Closes the HttpClient. Do not use this instance after call.
+  void dispose() => httpClient.close(force: true);
+
   /// Gets the home page.
   Future<NSHome> getHome() async {
-    final homePageResponse = await Uri.https("neko-sama.fr", "").get(
-      httpClient: httpClient,
-    );
+    final homePageResponse = await Uri.https("neko-sama.fr", "").get(httpClient: httpClient);
     final carousels = parse(homePageResponse.body).getElementsByClassName("row anime-listing");
     return NSHome(
       newEpisodes: extractNewEpisodes(homePageResponse),
