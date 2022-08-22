@@ -90,9 +90,6 @@ class NekoSama {
     }
   }
 
-  /// Gets an [NSAnime] from a [NSCarouselAnime].
-  Future<NSAnime> getFullAnime(NSAnimeBase anime) async => getAnime(anime.url);
-
   /// Tries to guess the episode urls of [anime].
   /// 
   /// Provided as a request-free alternative to [getEpisodes].

@@ -9,13 +9,12 @@ import 'package:nekosama/src/models/get_url_response.dart';
 extension UriWithGet on Uri {
 
   Future<GetUrlResponse> get({
-    HttpClient? httpClient,
+    required HttpClient httpClient,
     Map<String, dynamic>? headers,
     bool? preserveHeaderCase,
   }) async {
-    final client = httpClient ?? HttpClient();
     try {
-      final request = await client.getUrl(this)
+      final request = await httpClient.getUrl(this)
         ..followRedirects = false
         ..persistentConnection = false;
       if (headers != null) {
@@ -34,10 +33,6 @@ extension UriWithGet on Uri {
       );
     } on Exception catch (e) {
       throw NekoSamaException("failed to get or parse uri '${toString()}', $e");
-    } finally {
-      if (httpClient == null) {
-        client.close();
-      }
     }
   }
 }
