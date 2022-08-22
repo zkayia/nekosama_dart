@@ -102,23 +102,22 @@ class NekoSama {
     if (anime is NSAnime) {
       return [...anime.episodes.map((e) => e.url)];
     }
-    String zeroPadInt(int number) => "${number < 10 ? "0": ""}$number";
     if (anime.episodeCount == 0) {
       final eps = await _getEpisodes(anime.id, anime.url);
       return eps == null
         ? null
         : [...eps.map((e) => e.url)];
     }
+    final baseUrl = anime.url
+      .toString()
+      .replaceFirst("/info/", "/episode/");
     return [
       for (var i = 1; i < anime.episodeCount+1; i++)
         Uri.parse(
-          anime.url
-            .toString()
-            .replaceFirst("/info/", "/episode/")
-            .replaceFirst(
-              RegExp("-${source.apiName}\$"),
-              "-${zeroPadInt(i)}-${source.apiName}",
-            ),
+          baseUrl.replaceFirst(
+            RegExp("-${source.apiName}\$"),
+            "-${i.toString().padLeft(2, "0")}-${source.apiName}",
+          ),
         ),
     ];
   }
@@ -126,12 +125,13 @@ class NekoSama {
   /// Gets the [NSEpisode] list of [anime].
   /// 
   /// Returns `null` if no episodes were found.
-  Future<List<NSEpisode>?> getEpisodes(NSAnimeBase anime) async => anime is NSAnime
-    ? anime.episodes
-    : await _getEpisodes(
-      anime.id,
-      anime.url,
-    );
+  Future<List<NSEpisode>?> getEpisodes(NSAnimeBase anime, {bool force=false}) async =>
+    anime is NSAnime && !force
+      ? anime.episodes
+      : await _getEpisodes(
+        anime.id,
+        anime.url,
+      );
 
   Future<List<NSEpisode>?> _getEpisodes(int animeId, Uri animeUrl, [String? animePageBody]) async {
     try {
