@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:html/parser.dart';
 import 'package:nekosama/nekosama.dart';
 import 'package:nekosama/src/helpers/extract_anime_id.dart';
+import 'package:nekosama/src/helpers/extract_anime_source.dart';
 import 'package:nekosama/src/helpers/extract_episode_int.dart';
 import 'package:nekosama/src/helpers/extract_date.dart';
 import 'package:nekosama/src/helpers/extract_new_episodes.dart';
@@ -15,16 +16,11 @@ import 'package:nekosama/src/helpers/parse_episode_duration.dart';
 
 /// The main api for the `nekosama` library.
 class NekoSama {
-  /// The source type to use when interacting with `neko-sama.fr`.
-  final NSSources source;
   /// An optional `HttpClient` to use to make requests.
   final HttpClient httpClient;
 
   /// The main api for the `nekosama` library.
-  NekoSama({
-    this.source=NSSources.vostfr,
-    HttpClient? httpClient,
-  }) : httpClient = httpClient ?? HttpClient();
+  NekoSama({HttpClient? httpClient}) : httpClient = httpClient ?? HttpClient();
 
   // Closes the HttpClient. Do not use this instance after call.
   void dispose() => httpClient.close(force: true);
@@ -45,7 +41,7 @@ class NekoSama {
     try {
       final animePageBody = (await url.get(httpClient: httpClient)).body;
       final document = parse(animePageBody);
-      final  id = extractAnimeIdFromLink(url);
+      final id = extractAnimeId(url);
       final title = document.getElementsByTagName("h1").first;
       final infos = document.getElementById("anime-info-list")?.children;
       final synopsisRaw = document.querySelector(".synopsis > p")?.text.trim();
@@ -70,7 +66,7 @@ class NekoSama {
               RegExp(r"\[\W+([\w\s\-]+)\W").firstMatch(e.attributes["href"] ?? "")?.group(1) ?? "",
             ),
         ].whereType<NSGenres>().toList(),
-        source: source,
+        source: extractAnimeSource(url.toString()),
         status: NSStatuses.fromString(
           RegExp(r"^\s\w+(.+)").firstMatch(infos?.elementAt(2).text ?? "")?.group(1) ?? "",
         ) ?? NSStatuses.aired,
@@ -115,14 +111,16 @@ class NekoSama {
       for (var i = 1; i < anime.episodeCount+1; i++)
         Uri.parse(
           baseUrl.replaceFirst(
-            RegExp("-${source.apiName}\$"),
-            "-${i.toString().padLeft(2, "0")}-${source.apiName}",
+            RegExp("-${anime.source.apiName}\$"),
+            "-${i.toString().padLeft(2, "0")}-${anime.source.apiName}",
           ),
         ),
     ];
   }
 
   /// Gets the [NSEpisode] list of [anime].
+  /// 
+  /// Set [force] to true to require a request.
   /// 
   /// Returns `null` if no episodes were found.
   Future<List<NSEpisode>?> getEpisodes(NSAnimeBase anime, {bool force=false}) async =>
@@ -173,11 +171,13 @@ class NekoSama {
 
   /// Gets the search db and parses it into a list of NSSearchAnime.
   /// 
+  /// [source] is used to choose the database to fetch.
+  /// 
   /// See [getRawSearchDb] for more.
-  Future<List<NSSearchAnime>> getSearchDb() async {
+  Future<List<NSSearchAnime>> getSearchDb([NSSources source=NSSources.vostfr]) async {
     try {
       return [
-        ...(await getRawSearchDb()).map(
+        ...(await getRawSearchDb(source)).map(
           (e) => NSSearchAnime.fromSearchDbMap(e, source: source),
         ),
       ];
@@ -190,10 +190,12 @@ class NekoSama {
 
   /// Gets the search db, a json list of all animes.
   /// 
+  /// [source] is used to choose the database to fetch.
+  /// 
   /// Vostfr: https://neko-sama.fr/animes-search-vostfr.json
   /// 
   /// Vf: https://neko-sama.fr/animes-search-vf.json
-  Future<List<Map<String, dynamic>>> getRawSearchDb() async {
+  Future<List<Map<String, dynamic>>> getRawSearchDb([NSSources source=NSSources.vostfr]) async {
     try {
       return [
         ...(

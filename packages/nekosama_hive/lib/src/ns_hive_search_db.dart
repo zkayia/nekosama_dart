@@ -24,7 +24,7 @@ class NSHiveSearchDb {
   /// Return `true` if the database was disposed.
   bool get dbDisposed => !_dbActive;
 
-  NSHiveSearchDb(NekoSama parent) : _parent = parent;
+  NSHiveSearchDb(this._parent);
 
   /// Initialises the search database.
   /// 
@@ -74,19 +74,23 @@ class NSHiveSearchDb {
 
   /// Populates the search database.
   /// 
+  /// [source] is used to choose the database to fetch.
+  /// 
   /// Equivalent to [populateStream].
-  Future<void> populate() async =>
-    populateStream().firstWhere((progress) => progress.isDone);
+  Future<void> populate([NSSources source=NSSources.vostfr]) async =>
+    populateStream(source).firstWhere((progress) => progress.isDone);
 
   /// Populates the search database.
+  /// 
+  /// [source] is used to choose the database to fetch.
   /// 
   /// Returns a `Stream` of [NSProgress] that can be
   /// listened to receive progression events.
   /// 
   /// Equivalent to [populate].
-  Stream<NSProgress> populateStream() async* {
+  Stream<NSProgress> populateStream([NSSources source=NSSources.vostfr]) async* {
     await clear();
-    final searchDb = await _parent.getSearchDb();
+    final searchDb = await _parent.getSearchDb(source);
     final total = searchDb.length;
     final animesBox = Hive.box<String>("ns_animes");
     final titlesBox = Hive.box<String>("ns_titles");

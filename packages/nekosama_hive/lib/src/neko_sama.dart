@@ -9,10 +9,7 @@ class NekoSama extends base.NekoSama {
 	/// The Hive search database handler.
 	late NSHiveSearchDb hiveSearchDb;
 
-	NekoSama({
-		super.source,
-		super.httpClient,
-	}) {
+	NekoSama({super.httpClient}) {
 		hiveSearchDb = NSHiveSearchDb(this);
 	}
 }
