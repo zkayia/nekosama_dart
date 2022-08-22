@@ -19,6 +19,8 @@ class NSHiveSearchDb {
   /// 
   /// Returns `null` if the database was never populated.
   DateTime? get lastPopulated => Hive.box("ns_search_info").get("lastPopulated");
+  /// The current source used in the database.
+  NSSources? get dbSource => NSSources.fromString(Hive.box("ns_search_info").get("source") ?? "");
   /// Return `true` if the database was initialised.
   bool get dbInitialised => _dbActive;
   /// Return `true` if the database was disposed.
@@ -157,6 +159,7 @@ class NSHiveSearchDb {
           });
         }
         final infoBox = Hive.box("ns_search_info");
+        infoBox.put("source", source.name);
         infoBox.put("singleAnimeMaxGenres", singleAnimeMaxGenres);
         infoBox.put("lastPopulated", DateTime.now());
         final totalStatuses = statusesBox.toMap().map(
