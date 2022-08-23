@@ -12,4 +12,11 @@ class NekoSama extends base.NekoSama {
 	NekoSama({super.httpClient}) {
 		hiveSearchDb = NSHiveSearchDb(this);
 	}
+
+  // Closes the HttpClient and the search DB. Do not use this instance after call.
+  @override
+  void dispose() {
+    httpClient.close(force: true);
+    hiveSearchDb.dispose();
+  }
 }
