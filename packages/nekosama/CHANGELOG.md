@@ -1,4 +1,12 @@
 
+# 2.1.0
+
+### Features
+- added asList and asString getters to NSTitles
+
+### Miscellaneous
+- centralized changelogs to nekosama's
+
 # 2.0.0
 
 - migrated the Hive search implementation into nekosama_hive
