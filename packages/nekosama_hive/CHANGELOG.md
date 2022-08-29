@@ -1,4 +1,2 @@
 
-# 2.0.0
-
-Initial version.
+See [nekosama changelog.](/packages/nekosama/CHANGELOG.md)
