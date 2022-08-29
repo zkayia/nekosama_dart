@@ -18,6 +18,15 @@ class NSTitles {
     this.others,
   });
 
+  List<String> get asList => [
+    english,
+    french,
+    romanji,
+    others
+  ].whereType<String>().toList();
+
+  String get asString => asList.join(" ");
+
   NSTitles copyWith({
     int? animeId,
     String? english,
