@@ -8,6 +8,7 @@ export 'package:nekosama/nekosama.dart' show
 	NSSources,
 	NSStatuses,
 	NSTypes,
+  NekoSamaException,
 	NSAnimeBase,
 	NSAnimeExtendedBase,
 	NSAnime,
@@ -15,6 +16,7 @@ export 'package:nekosama/nekosama.dart' show
 	NSEpisode,
 	NSHome,
 	NSNewEpisode,
+  NSSearchAnime,
 	NSTitles;
 
 export 'package:nekosama_hive/src/querys/ns_double_query.dart' show
@@ -24,6 +26,8 @@ export 'package:nekosama_hive/src/querys/ns_int_query.dart' show
 export 'package:nekosama_hive/src/querys/ns_string_query.dart' show
 	NSStringQuery;
 
+export 'package:nekosama_hive/src/models/ns_progress.dart' show
+	NSProgress;
 export 'package:nekosama_hive/src/models/ns_search_db_stats.dart' show
 	NSSearchDbStats;
 
