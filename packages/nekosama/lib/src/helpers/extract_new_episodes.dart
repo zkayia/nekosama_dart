@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:nekosama/src/helpers/extract_episode_int.dart';
 import 'package:nekosama/src/helpers/extract_anime_id.dart';
 import 'package:nekosama/src/models/get_url_response.dart';
-import 'package:nekosama/src/models/ns_dated_episode.dart';
+import 'package:nekosama/src/models/ns_new_episode.dart';
 
 
 List<NSNewEpisode> extractNewEpisodes(GetUrlResponse homePageResponse) {

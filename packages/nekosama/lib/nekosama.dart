@@ -26,7 +26,7 @@ export 'package:nekosama/src/models/ns_episode.dart' show
   NSEpisode;
 export 'package:nekosama/src/models/ns_home.dart' show
   NSHome;
-export 'package:nekosama/src/models/ns_dated_episode.dart' show
+export 'package:nekosama/src/models/ns_new_episode.dart' show
   NSNewEpisode;
 export 'package:nekosama/src/models/ns_search_anime.dart' show
   NSSearchAnime;
