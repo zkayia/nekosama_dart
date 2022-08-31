@@ -1,4 +1,13 @@
 
+# 2.2.1
+
+### Fixes
+- added missing exports in nekosama_hive
+
+### Miscellaneous
+- renamed NSNewEpisode file to match class name
+- moved NSSearchDbStats to nekosama_hive (unused in nekosama)
+
 # 2.2.0
 
 ### Features
