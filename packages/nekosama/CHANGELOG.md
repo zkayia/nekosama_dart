@@ -1,4 +1,9 @@
 
+# 2.2.0
+
+### Features
+- added new genres: battle royale, cyberpunk, isekai, mafia, magic & military
+
 # 2.1.0
 
 ### Features
