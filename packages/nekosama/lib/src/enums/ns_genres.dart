@@ -13,10 +13,20 @@ enum NSGenres {
     "adventure",
     "aventure",
   ),
+  battleRoyale(
+    "battle royale",
+    "battle royale",
+    "battle royale",
+  ),
   comedy(
     "c0m1dy",
     "comedy",
     "comédie",
+  ),
+  cyberpunk(
+    "cyberpunk",
+    "cyberpunk",
+    "cyberpunk",
   ),
   drama(
     "drama",
@@ -43,6 +53,21 @@ enum NSGenres {
     "horror",
     "horreur",
   ),
+  isekai(
+    "isekai",
+    "isekai",
+    "isekai",
+  ),
+  mafia(
+    "mafia",
+    "mafia",
+    "mafia",
+  ),
+  magic(
+    "magic",
+    "magic",
+    "magique",
+  ),
   magicalGirl(
     "mahou shoujo",
     "magical girl",
@@ -52,6 +77,11 @@ enum NSGenres {
     "mecha",
     "mecha",
     "mecha",
+  ),
+  military(
+    "military",
+    "military",
+    "militaire",
   ),
   music(
     "music",
