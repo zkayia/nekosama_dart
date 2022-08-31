@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:nekosama/nekosama.dart';
 import 'package:nekosama_hive/src/helpers/add_id_to_box.dart';
 import 'package:nekosama_hive/src/models/ns_progress.dart';
+import 'package:nekosama_hive/src/models/ns_search_db_stats.dart';
 import 'package:nekosama_hive/src/querys/ns_double_query.dart';
 import 'package:nekosama_hive/src/querys/ns_int_query.dart';
 import 'package:nekosama_hive/src/querys/ns_num_query.dart';

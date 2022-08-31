@@ -24,6 +24,9 @@ export 'package:nekosama_hive/src/querys/ns_int_query.dart' show
 export 'package:nekosama_hive/src/querys/ns_string_query.dart' show
 	NSStringQuery;
 
+export 'package:nekosama_hive/src/models/ns_search_db_stats.dart' show
+	NSSearchDbStats;
+
 export 'package:nekosama_hive/src/neko_sama.dart' show
 	NekoSama;
 export 'package:nekosama_hive/src/ns_hive_search_db.dart' show

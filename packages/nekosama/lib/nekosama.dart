@@ -30,8 +30,6 @@ export 'package:nekosama/src/models/ns_new_episode.dart' show
   NSNewEpisode;
 export 'package:nekosama/src/models/ns_search_anime.dart' show
   NSSearchAnime;
-export 'package:nekosama/src/models/ns_search_db_stats.dart' show
-  NSSearchDbStats;
 export 'package:nekosama/src/models/ns_titles.dart' show
   NSTitles;
 
