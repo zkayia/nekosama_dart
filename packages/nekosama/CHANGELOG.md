@@ -1,4 +1,9 @@
 
+# 2.3.0
+
+### Features
+- NekoSamaExceptions now provide the initial exception
+
 # 2.2.1
 
 ### Fixes
