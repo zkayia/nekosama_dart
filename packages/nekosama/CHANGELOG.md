@@ -1,4 +1,13 @@
 
+# 2.3.1
+
+### Fixes
+- avoid using NekoSamaExceptions as the initial exception to prevent chaining
+
+### Miscellaneous
+- added a package comparison in the global readme
+- fixed a type in nekosama_hive readme
+
 # 2.3.0
 
 ### Features
