@@ -40,7 +40,7 @@ api.hiveSearchDb.dispose();
 await api.hiveSearchDb.populate(source);
 ```
 
-If you with to get progress information on the populate process, you can use:
+If you wish to get progress information on the populate process, you can use:
 ```dart
 final process = api.hiveSearchDb.populateStream(source);
 
