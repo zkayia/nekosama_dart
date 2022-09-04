@@ -3,9 +3,10 @@
 class NekoSamaException implements Exception {
 
   final String message;
+  final Object? exception;
 
-  NekoSamaException(this.message) : super();
+  NekoSamaException(this.message, [this.exception]) : super();
 
   @override
-  String toString() => "NekoSamaException: $message";
+  String toString() => "NekoSamaException: $message; $exception.";
 }

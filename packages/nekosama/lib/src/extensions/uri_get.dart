@@ -32,7 +32,7 @@ extension UriWithGet on Uri {
         timestamp: DateTime.now(),
       );
     } on Exception catch (e) {
-      throw NekoSamaException("failed to get or parse uri '${toString()}', $e");
+      throw NekoSamaException("Failed to get or parse uri '${toString()}'", e);
     }
   }
 }

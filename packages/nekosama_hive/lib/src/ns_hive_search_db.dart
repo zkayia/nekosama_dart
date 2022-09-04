@@ -51,7 +51,7 @@ class NSHiveSearchDb {
       await Hive.openBox<List<int>>("ns_episodeCount");
       _dbActive = true;
     } on Exception catch (e) {
-      throw NekoSamaException("Failed to initialise database, $e");
+      throw NekoSamaException("Failed to initialise database", e);
     }
   }
 
@@ -206,9 +206,7 @@ class NSHiveSearchDb {
       final anime = Hive.box<String>("ns_animes").get(id);
       return anime == null ? null : NSSearchAnime.fromJson(anime);
     } on Exception catch (e) {
-      throw NekoSamaException(
-        "Something went wrong while looking for an anime with id $id, $e",
-      );
+      throw NekoSamaException("Something went wrong while looking for an anime with id '$id'", e);
     }
   }
 

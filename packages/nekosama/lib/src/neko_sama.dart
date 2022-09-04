@@ -82,7 +82,7 @@ class NekoSama {
         endDate: extractDate(dates?.last ?? ""),
       );
     } on Exception catch (e) {
-      throw NekoSamaException("Failed to get anime at url '$url', $e");
+      throw NekoSamaException("Failed to get anime at url '$url'", e);
     }
   }
 
@@ -150,7 +150,7 @@ class NekoSama {
           ),
       ];
     } on Exception catch (e) {
-      throw NekoSamaException("Failed to parse episodes for anime at url '$animeUrl', $e");
+      throw NekoSamaException("Failed to parse episodes for anime at url '$animeUrl'", e);
     }
   }
 
@@ -165,7 +165,7 @@ class NekoSama {
         )?.group(1) ?? "",
       );
     } on Exception catch (e) {
-      throw NekoSamaException("Failed to get the video link, $e");
+      throw NekoSamaException("Failed to get the video link.", e);
     }
   }
 
@@ -184,7 +184,7 @@ class NekoSama {
     } on NekoSamaException catch (_) {
       rethrow;
     } on Exception catch (e) {
-      throw NekoSamaException("Failed to build a NSSearchAnime from the search db, $e");
+      throw NekoSamaException("Failed to build a NSSearchAnime from the search db", e);
     }
   }
 
@@ -210,7 +210,7 @@ class NekoSama {
         ).whereType<Map<String, dynamic>>()
       ];
     } on Exception catch (e) {
-      throw NekoSamaException("Failed to fetch/parse the search db, $e");
+      throw NekoSamaException("Failed to fetch/parse the search db", e);
     }
   }
 }

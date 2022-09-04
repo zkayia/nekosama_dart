@@ -17,6 +17,6 @@ DateTime? extractDate(String date) {
     }
     return null;
   } on Exception catch (e) {
-    throw NekoSamaException("Failed to extract date from String '$date', $e");
+    throw NekoSamaException("Failed to extract date from String '$date'", e);
   }
 }

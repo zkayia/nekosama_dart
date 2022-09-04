@@ -10,7 +10,7 @@ int extractEpisodeInt(String episode) {
     case "film":
       return 1;
     case null:
-      throw NekoSamaException("unable to extract episode number from string $episode");
+      throw NekoSamaException("Unable to extract episode number from String $episode");
     default:
       return int.parse(match!);
   }

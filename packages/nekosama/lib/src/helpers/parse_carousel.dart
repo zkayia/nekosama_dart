@@ -29,6 +29,6 @@ NSCarouselAnime parseCarouselElement(Element carouselElement) {
       episodeCount: int.parse(matches?.group(2) ?? ""),
     );
   } on Exception catch (e) {
-    throw NekoSamaException("unable to extract anime from carousel element: $e");
+    throw NekoSamaException("Unable to extract anime from carousel element", e);
   }
 }
