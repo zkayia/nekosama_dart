@@ -25,7 +25,7 @@ enum NSStatuses {
   static NSStatuses? fromString(String status) {
     final name = status.trim().toLowerCase();
     for (final status in NSStatuses.values) {
-      if ([status.apiName, status.name, status.frenchName].contains(name)) {
+      if ([status.name, status.apiName, status.englishName, status.frenchName].contains(name)) {
         return status;
       }
     }

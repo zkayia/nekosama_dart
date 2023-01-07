@@ -27,7 +27,7 @@ enum NSSources {
   static NSSources? fromString(String source) {
     final name = source.trim().toLowerCase();
     for (final source in NSSources.values) {
-      if ([source.name, source.englishName].contains(name)) {
+      if ([source.name, source.apiName, source.englishName, source.frenchName].contains(name)) {
         return source;
       }
     }

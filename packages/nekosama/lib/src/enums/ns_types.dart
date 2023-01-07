@@ -25,7 +25,7 @@ enum NSTypes {
   static NSTypes? fromString(String type) {
     final name = type.trim().toLowerCase();
     for (final type in NSTypes.values) {
-      if ([type.apiName, type.name, type.frenchName].contains(name)) {
+      if ([type.name, type.apiName, type.englishName, type.frenchName].contains(name)) {
         return type;
       }
     }

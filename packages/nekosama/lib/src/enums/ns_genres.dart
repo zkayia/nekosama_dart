@@ -147,7 +147,7 @@ enum NSGenres {
   static NSGenres? fromString(String genre) {
     final name = genre.trim().toLowerCase();
     for (final genre in NSGenres.values) {
-      if ([genre.apiName, genre.englishName, genre.frenchName].contains(name)) {
+      if ([genre.name, genre.apiName, genre.englishName, genre.frenchName].contains(name)) {
         return genre;
       }
     }
