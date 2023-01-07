@@ -18,7 +18,7 @@ enum NSSources {
   /// The url of this source.
   Uri get url => Uri.https(
     "neko-sama.fr",
-    "anime${this == NSSources.vf ? "-vf" : ""}",
+    "/anime${this == NSSources.vf ? "-vf" : ""}",
   );
 
   /// Contruct a [NSSources] from a `String`.

@@ -203,7 +203,7 @@ class NekoSama {
             (
               await Uri.https(
                 "neko-sama.fr",
-                "/animes-search-${source.name}.json",
+                "/animes-search-${source.apiName}.json",
               ).get(httpClient: httpClient)
             ).body,
           ) as List
