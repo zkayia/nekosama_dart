@@ -54,7 +54,7 @@ class NekoSama {
         id: id,
         title: title.firstChild?.text?.replaceAll("VOSTFR", "").trim() ?? "",
         url: url,
-        thumbnail: Uri.tryParse(document.querySelector(".cover > img")?.attributes["src"] ?? "") ?? Uri(),
+        thumbnail: Uri.tryParse(document.querySelector(".cover > img")?.attributes["src"] ?? "::Not valid URI::") ?? Uri(),
         episodeCount: extractEpisodeInt(infos?.elementAt(3).text ?? "?"),
         titles: NSTitles(
           animeId: id,
@@ -144,7 +144,7 @@ class NekoSama {
             animeId: animeId,
             animeUrl: animeUrl,
             episodeNumber: extractEpisodeInt(episode["episode"]),
-            thumbnail: Uri.tryParse(episode["url_image"] ?? "") ?? Uri(),
+            thumbnail: Uri.tryParse(episode["url_image"] ?? "::Not valid URI::") ?? Uri(),
             url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
             duration: parseEpisodeDuration(episode["time"]),
           ),
@@ -162,7 +162,7 @@ class NekoSama {
       return Uri.tryParse(
         RegExp(r"=\s'(https://www.pstream.net/e/.+)'")
           .firstMatch((await episode.url.get(httpClient: httpClient)).body,
-        )?.group(1) ?? "",
+        )?.group(1) ?? "::Not valid URI::",
       );
     } on Exception catch (e) {
       throw NekoSamaException("Failed to get the video link.", e);

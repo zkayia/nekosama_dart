@@ -17,7 +17,7 @@ List<NSNewEpisode> extractNewEpisodes(GetUrlResponse homePageResponse) {
           animeId: extractAnimeId(Uri.parse(episode["anime_url"]!)),
           animeUrl: Uri.parse("https://neko-sama.fr${episode["anime_url"]}"),
           episodeNumber: extractEpisodeInt(episode["episode"] ?? "0"),
-          thumbnail: Uri.tryParse(episode["url_bg"] ?? "") ?? Uri(),
+          thumbnail: Uri.tryParse(episode["url_bg"] ?? "::Not valid URI::") ?? Uri(),
           url: Uri.parse("https://neko-sama.fr${episode["url"] ?? ""}"),
           addedAt: _parseNewEpisodeTime(
             homePageResponse.timestamp,

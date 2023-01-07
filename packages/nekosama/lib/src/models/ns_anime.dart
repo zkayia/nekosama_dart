@@ -92,8 +92,8 @@ class NSAnime extends NSAnimeExtendedBase {
   factory NSAnime.fromMap(Map<String, dynamic> map) => NSAnime(
     id: map["id"] ?? 0,
     title: map["title"] ?? "",
-    url: Uri.tryParse(map["url"] ?? "") ?? Uri(),
-    thumbnail: Uri.tryParse(map["thumbnail"] ?? "") ?? Uri(),
+    url: Uri.tryParse(map["url"] ?? "::Not valid URI::") ?? Uri(),
+    thumbnail: Uri.tryParse(map["thumbnail"] ?? "::Not valid URI::") ?? Uri(),
     episodeCount: map["episodeCount"] ?? 0,
     titles: NSTitles.fromMap(map["titles"]),
     genres: List<NSGenres>.from(map["genres"]?.map((x) => NSGenres.values.elementAt(x))),

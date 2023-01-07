@@ -87,8 +87,8 @@ class NSSearchAnime extends NSAnimeExtendedBase {
     status: NSStatuses.values.elementAt(map["status"]),
     type: NSTypes.values.elementAt(map["type"]),
     score: map["score"] ?? 0.0,
-    url: Uri.tryParse(map["url"] ?? "") ?? Uri(),
-    thumbnail: Uri.tryParse(map["thumbnail"] ?? "") ?? Uri(),
+    url: Uri.tryParse(map["url"] ?? "::Not valid URI::") ?? Uri(),
+    thumbnail: Uri.tryParse(map["thumbnail"] ?? "::Not valid URI::") ?? Uri(),
     episodeCount: map["episodeCount"] ?? 0,
     year: map["year"] ?? 0,
     popularity: map["popularity"] ?? 0.0,
@@ -124,7 +124,7 @@ class NSSearchAnime extends NSAnimeExtendedBase {
     popularity: nsMap["popularity"] ?? 0.0,
     score: double.tryParse(nsMap["score"] ?? "0.0") ?? 0.0,
     url: Uri.parse("https://neko-sama.fr${nsMap["url"] ?? ""}"),
-    thumbnail: Uri.tryParse(nsMap["url_image"] ?? "") ?? Uri(),
+    thumbnail: Uri.tryParse(nsMap["url_image"] ?? "::Not valid URI::") ?? Uri(),
     episodeCount: extractEpisodeInt(nsMap["nb_eps"] ?? "0"),
   );
 
