@@ -146,9 +146,9 @@ enum NSGenres {
   /// Returns `null` if [genre] is not a valid value.
   static NSGenres? fromString(String genre) {
     final name = genre.trim().toLowerCase();
-    for (final genre in NSGenres.values) {
-      if ([genre.name, genre.apiName, genre.englishName, genre.frenchName].contains(name)) {
-        return genre;
+    for (final genreVal in NSGenres.values) {
+      if ([genreVal.name, genreVal.apiName, genreVal.englishName, genreVal.frenchName].contains(name)) {
+        return genreVal;
       }
     }
     return null;

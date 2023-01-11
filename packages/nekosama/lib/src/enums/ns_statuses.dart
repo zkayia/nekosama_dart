@@ -24,9 +24,9 @@ enum NSStatuses {
   /// Returns `null` if [status] is not a valid value.
   static NSStatuses? fromString(String status) {
     final name = status.trim().toLowerCase();
-    for (final status in NSStatuses.values) {
-      if ([status.name, status.apiName, status.englishName, status.frenchName].contains(name)) {
-        return status;
+    for (final statusVal in NSStatuses.values) {
+      if ([statusVal.name, statusVal.apiName, statusVal.englishName, statusVal.frenchName].contains(name)) {
+        return statusVal;
       }
     }
     return null;

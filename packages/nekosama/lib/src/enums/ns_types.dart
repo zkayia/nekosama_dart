@@ -24,9 +24,9 @@ enum NSTypes {
   /// Returns `null` if [type] is not a valid value.
   static NSTypes? fromString(String type) {
     final name = type.trim().toLowerCase();
-    for (final type in NSTypes.values) {
-      if ([type.name, type.apiName, type.englishName, type.frenchName].contains(name)) {
-        return type;
+    for (final typeVal in NSTypes.values) {
+      if ([typeVal.name, typeVal.apiName, typeVal.englishName, typeVal.frenchName].contains(name)) {
+        return typeVal;
       }
     }
     return null;

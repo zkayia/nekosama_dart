@@ -26,9 +26,9 @@ enum NSSources {
   /// Returns `null` if [source] is not a valid value.
   static NSSources? fromString(String source) {
     final name = source.trim().toLowerCase();
-    for (final source in NSSources.values) {
-      if ([source.name, source.apiName, source.englishName, source.frenchName].contains(name)) {
-        return source;
+    for (final sourceVal in NSSources.values) {
+      if ([sourceVal.name, sourceVal.apiName, sourceVal.englishName, sourceVal.frenchName].contains(name)) {
+        return sourceVal;
       }
     }
     return null;
