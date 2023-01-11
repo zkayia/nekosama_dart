@@ -16,6 +16,7 @@ import 'package:nekosama/src/helpers/parse_episode_duration.dart';
 
 /// The main api for the `nekosama` library.
 class NekoSama {
+  
   /// An optional `HttpClient` to use to make requests.
   final HttpClient httpClient;
 

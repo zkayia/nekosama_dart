@@ -1,6 +1,7 @@
 
 import 'package:nekosama/src/models/ns_episode.dart';
 
+
 class NSNewEpisode extends NSEpisode {
 
   final DateTime addedAt;
