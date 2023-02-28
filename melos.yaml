@@ -11,3 +11,9 @@ command:
 
 ide:
   intellij: false
+
+scripts:
+  unused:
+    run: dart pub run dart_code_metrics:metrics check-unused-code lib && dart pub run dart_code_metrics:metrics check-unused-files lib
+    exec:
+      concurrency: 1
