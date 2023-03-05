@@ -3,35 +3,37 @@
 library nekosama_hive;
 
 
+// To keep the order of the files
+// ignore: combinators_ordering
 export 'package:nekosama/nekosama.dart' show 
-	NSGenres,
-	NSSources,
-	NSStatuses,
-	NSTypes,
+  NSGenres,
+  NSSources,
+  NSStatuses,
+  NSTypes,
   NekoSamaException,
-	NSAnimeBase,
-	NSAnimeExtendedBase,
-	NSAnime,
-	NSCarouselAnime,
-	NSEpisode,
-	NSHome,
-	NSNewEpisode,
+  NSAnimeBase,
+  NSAnimeExtendedBase,
+  NSAnime,
+  NSCarouselAnime,
+  NSEpisode,
+  NSHome,
+  NSNewEpisode,
   NSSearchAnime,
-	NSTitles;
+  NSTitles;
 
 export 'package:nekosama_hive/src/querys/ns_double_query.dart' show
-	NSdoubleQuery;
+  NSdoubleQuery;
 export 'package:nekosama_hive/src/querys/ns_int_query.dart' show
-	NSintQuery;
+  NSintQuery;
 export 'package:nekosama_hive/src/querys/ns_string_query.dart' show
-	NSStringQuery;
+  NSStringQuery;
 
 export 'package:nekosama_hive/src/models/ns_progress.dart' show
-	NSProgress;
+  NSProgress;
 export 'package:nekosama_hive/src/models/ns_search_db_stats.dart' show
-	NSSearchDbStats;
+  NSSearchDbStats;
 
 export 'package:nekosama_hive/src/neko_sama.dart' show
-	NekoSama;
+  NekoSama;
 export 'package:nekosama_hive/src/ns_hive_search_db.dart' show
-	NSHiveSearchDb;
+  NSHiveSearchDb;
