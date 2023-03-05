@@ -158,6 +158,7 @@ class NekoSama {
   /// Gets the url of the video player embed of [episode].
   /// 
   /// Currently only supports episode videos hosted on `pstream.net`.
+  @Deprecated("Use getVideoUrls instead")
   Future<Uri?> getVideoUrl(NSEpisode episode) async {
     try {
       return Uri.tryParse(
@@ -167,6 +168,26 @@ class NekoSama {
       );
     } on Exception catch (e) {
       throw NekoSamaException("Failed to get the video link.", e);
+    }
+  }
+
+  /// Gets the url of the video player embed of [episode].
+  /// 
+  /// Returns an empty list if no video is found.
+  Future<List<Uri>> getVideoUrls(NSEpisode episode) async {
+    try {
+      return [
+        ...RegExp(r"^\s*video\[\d+]\s*=\s*'(.+)';$", multiLine: true)
+          .allMatches((await episode.url.get(httpClient: httpClient)).body)
+          .map(
+            (e) => Uri.tryParse(
+              (e.group(1)?.isNotEmpty ?? true) ? e.group(1)! : "::Not valid URI::",
+            ),
+          )
+          .whereType<Uri>(),
+      ];
+    } on Exception catch (e) {
+      throw NekoSamaException("Failed to get video players.", e);
     }
   }
 
