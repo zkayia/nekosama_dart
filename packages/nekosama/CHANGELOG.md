@@ -1,4 +1,20 @@
 
+# 2.4.0
+
+### Features
+- new getVideoUrls method to fetch all video players urls
+- added website infos to NSHome and getHome
+
+### Fixes
+- fixed the NSSources and source db url being off
+- fixed the fromString factory of enums not taking into account some values
+- fixed default value for Uri parsing when the initial value was invalid
+
+### Miscellaneous
+- deprecated getVideoUrl in favour of getVideoUrls
+- added code metrics
+- switched to space indent in nekosama_hive
+
 # 2.3.1
 
 ### Fixes

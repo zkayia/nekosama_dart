@@ -1,7 +1,7 @@
 
 name: nekosama
 description: Unofficial dart api for neko-sama.fr.
-version: 2.3.1
+version: 2.4.0
 homepage: https://github.com/zkayia/nekosama_dart
 issue_tracker: https://github.com/zkayia/nekosama_dart/issues
 repository: https://github.com/zkayia/nekosama_dart
