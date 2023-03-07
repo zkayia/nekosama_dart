@@ -29,11 +29,29 @@ class NekoSama {
   /// Gets the home page.
   Future<NSHome> getHome() async {
     final homePageResponse = await Uri.https("neko-sama.fr", "").get(httpClient: httpClient);
-    final carousels = parse(homePageResponse.body).getElementsByClassName("row anime-listing");
+    final document = parse(homePageResponse.body);
+    final carousels = document.getElementsByClassName("row anime-listing");
     return NSHome(
       newEpisodes: extractNewEpisodes(homePageResponse),
       seasonalAnimes: parseCarousel(carousels.first),
       mostPopularAnimes: parseCarousel(carousels.last),
+      websiteInfos: [
+        ...document.querySelectorAll("#home .container > div:not([class])").map(
+          (e) {
+            final parts = e.text.split(RegExp(r"\s*-\s*"));
+            final date = parts.first.split("/").map(int.parse);
+            return NSWebsiteInfo(
+              date: DateTime(
+                date.last,
+                date.elementAt(1),
+                date.first,
+              ),
+              message: parts.last.trim(),
+              raw: e.text,
+            );
+          },
+        ),
+      ],
     );
   }
 

@@ -19,7 +19,8 @@ export 'package:nekosama/nekosama.dart' show
   NSHome,
   NSNewEpisode,
   NSSearchAnime,
-  NSTitles;
+  NSTitles,
+  NSWebsiteInfo;
 
 export 'package:nekosama_hive/src/querys/ns_double_query.dart' show
   NSdoubleQuery;

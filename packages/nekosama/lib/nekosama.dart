@@ -32,6 +32,8 @@ export 'package:nekosama/src/models/ns_search_anime.dart' show
   NSSearchAnime;
 export 'package:nekosama/src/models/ns_titles.dart' show
   NSTitles;
+export 'package:nekosama/src/models/ns_website_info.dart' show
+  NSWebsiteInfo;
 
 export 'package:nekosama/src/neko_sama.dart' show
   NekoSama;
