@@ -1,3 +1,4 @@
+__This repo no longer has any use since [neko-sama.fr](https://neko-sama.fr) sadly closed in September 2024__ *rip*
 
 # nekosama
 
